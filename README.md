@@ -1,8 +1,9 @@
 (c) Copyright 2016-2019 Univa Corporation
+
 This software is licensed using Apache License 2.0 
 Please read the LICENSE file for a complete listing of the License.
 
-# UGE DRMAA2 Python API 
+# UGE DRMAA v2 Python API 
 
 ## Prerequisites
 
