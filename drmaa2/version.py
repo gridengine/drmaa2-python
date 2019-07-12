@@ -67,8 +67,7 @@ class Version(Drmaa2Object):
         []
         """
         if cls.implementation_specific_keys is None:
-            # No drmaa2_lib method to retrieve impl spec keys for version
-            cls.implementation_specific_keys = []
+            cls.implementation_specific_keys = cls.to_py_string_list(cls.get_drmaa2_library().drmaa2_version_impl_spec())
         return cls.implementation_specific_keys
 
     @classmethod

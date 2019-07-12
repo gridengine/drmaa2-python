@@ -62,7 +62,7 @@ setup(name = 'uge-drmaa2',
                      'Intended Audience :: Developers',
                      'Operating System :: OS Independent',
                      'Programming Language :: Python :: 2.7',
-                     'Programming Language :: Python :: 3.X',
+                     'Programming Language :: Python :: 3.x',
       ],
       **extra
 )
