@@ -108,7 +108,7 @@ class JobInfo(Drmaa2Object):
         :returns: String list of implementation-specific keys.
 
         >>> print(JobInfo.get_implementation_specific_keys())
-        ['uge_ji_priority', 'uge_ji_mem', 'uge_ji_rss', 'uge_ji_vmem']
+        ['uge_ji_priority', 'uge_ji_failed', 'uge_ji_mem', 'uge_ji_rss', 'uge_ji_vmem']
         """
         if cls.implementation_specific_keys is None:
             cls.implementation_specific_keys = cls.to_py_string_list(cls.get_drmaa2_library().drmaa2_jinfo_impl_spec())

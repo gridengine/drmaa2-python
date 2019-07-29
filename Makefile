@@ -64,7 +64,7 @@ test: drmaa2/__init__.py
 
 clean:
 	make -C doc clean
-	rm -rf test/.coverage *.egg-info `find . -name '*.pyc' -o -name '__pycache__' -o -name 'build'`
+	rm -rf test/.coverage *.egg-info `find . -name '*.pyc' -o -name '__pycache__' -o -name 'build' -o -name '.coverage' `
 
 tidy: clean
 	rm -rf dist
