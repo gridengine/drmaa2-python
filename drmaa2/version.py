@@ -18,9 +18,13 @@
 #___INFO__MARK_END__
 
 from ctypes import POINTER
+from ctypes import cast
+from ctypes import c_void_p
+from ctypes import pointer
 
 from .byte_string import ByteString
 from .drmaa2_ctypes import drmaa2_version
+from .drmaa2_ctypes import drmaa2_dict
 from .drmaa2_object import Drmaa2Object
 
 class Version(Drmaa2Object):
@@ -44,8 +48,13 @@ class Version(Drmaa2Object):
         if isinstance(version, POINTER(drmaa2_version)):
             self._struct = POINTER(drmaa2_version)()
             self._struct.contents = drmaa2_version()
-            self.major = ByteString(getattr(version.contents, 'major').value).decode()
-            self.minor = ByteString(getattr(version.contents, 'minor').value).decode()
+            if version:
+                self.major = ByteString(getattr(version.contents, 'major').value).decode()
+                self.minor = ByteString(getattr(version.contents, 'minor').value).decode()
+                self.implementation_specific = self.get_implementation_specific_attrs()
+            else:
+                self.major = "-NA-"
+                self.minor = "-NA-"
         elif isinstance(version, drmaa2_version):
             self._struct = POINTER(drmaa2_version)()
             self._struct.contents = version
@@ -57,6 +66,21 @@ class Version(Drmaa2Object):
         pass
    
     @classmethod
+    def get_implementation_specific_attrs(cls):
+        """
+        Retrieve dict of implementation-specific attrs.
+
+        :returns: {str:str} dict of implementation-specific attrs.
+
+        >>> print(Version.get_implementation_specific_attrs())
+        ['uge_version_json':'xyz']
+        """
+        ctypes_version = cls.get_drmaa2_library().drmaa2_get_drmaa_version();
+        if cls.implementation_specific_attrs is None:
+            cls.implementation_specific_attrs = cls.to_py_dict(cls.get_drmaa2_library().uge_vi_impl_spec_get(ctypes_version))
+        return cls.implementation_specific_attrs
+
+    @classmethod
     def get_implementation_specific_keys(cls):
         """
         Retrieve list of implementation-specific keys.
@@ -64,7 +88,7 @@ class Version(Drmaa2Object):
         :returns: String list of implementation-specific keys.
 
         >>> print(Version.get_implementation_specific_keys())
-        []
+        ['uge_version_json']
         """
         if cls.implementation_specific_keys is None:
             cls.implementation_specific_keys = cls.to_py_string_list(cls.get_drmaa2_library().drmaa2_version_impl_spec())

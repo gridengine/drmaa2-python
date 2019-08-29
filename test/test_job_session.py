@@ -148,7 +148,7 @@ def test_get_job_categories():
 
 def test_get_jobs():
     js = JobSession('js-01')
-    j_name = 'job-%s' % int(random.uniform(0, 1000))
+    j_name = 'drmaa2python-%s' % int(random.uniform(0, 1000))
     j = js.run_job({'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : j_name})
     print('\nSubmitted job: %s' % j)
     ji = j.get_info()

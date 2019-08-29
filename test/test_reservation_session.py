@@ -92,6 +92,7 @@ def test_get_reservation():
     rs = ReservationSession('rs-01')
     r_name = 'reservation-%s' % int(random.uniform(0, 1000))
     r = rs.request_reservation({'reservation_name' : r_name, 'duration' : 100})
+    print r
     r2 = rs.get_reservation(r.id)
     assert(r2.id == r.id)
     print('Got reservation: %s' % r)

@@ -39,8 +39,9 @@ def test_suspend_and_resume():
     session_name = generate_random_string()
     js = JobSession(session_name)
     ja = js.run_bulk_jobs({'remote_command' : '/bin/sleep', 'args' : ['5']}, 1, 10, 3, 2)
-    ja.suspend()
     j_list = ja.job_list
+    js.wait_any_started(j_list)
+    ja.suspend()
     suspended_jobs = []
     for j in j_list:
         s,ss = j.get_state()

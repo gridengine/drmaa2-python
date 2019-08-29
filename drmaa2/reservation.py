@@ -88,8 +88,8 @@ class Reservation(Drmaa2Object):
         []
         """
         self.logger.debug('Retrieving template for reservation id {}'.format(self.id))
-        ctypes_reservation_template = self.drmaa2_lib.drmaa2_r_get_rtemplate(self._struct)
         #ctypes_reservation_template = self.drmaa2_lib.drmaa2_r_get_reservation_template(self._struct)
+        ctypes_reservation_template = self.drmaa2_lib.drmaa2_r_get_rtemplate(self._struct)
         if not ctypes_reservation_template:
             ExceptionMapper.check_last_error_code()
 

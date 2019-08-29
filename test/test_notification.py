@@ -17,13 +17,18 @@
 ########################################################################### 
 #___INFO__MARK_END__
 
+from nose import SkipTest
 from drmaa2 import Notification
+from drmaa2 import UnsupportedOperation
 
 def test_register_event_callback():
     def callback(notification):
         print('Got notification: %s' % notification)
 
-    Notification.register_event_notification(callback)
-    print('\nRegistered callback for event notification')
+    try:
+        Notification.register_event_notification(callback)
+        print('\nRegistered callback for event notification')
+    except UnsupportedOperation:
+        raise SkipTest('Not yet implemented optional feature.')
 
 

@@ -24,6 +24,7 @@ def test_machine_info():
     h = socket.gethostname()
     ms = MonitoringSession('ms-01')
     mi_list = ms.get_all_machines([h])
+    print mi_list
     assert(len(mi_list) == 1)
     mi = mi_list[0]
     assert(mi.name == h)

@@ -105,8 +105,7 @@ class MonitoringSession(Drmaa2Object):
             self.logger.debug('Closing monitoring session {}'.format(self._name_bs.decode()))
             drmaa2_lib = self.get_drmaa2_library()
             self.exception_mapper.check_status_code(drmaa2_lib.drmaa2_close_msession(self._struct))
-            # Freeing monitoring session causes segfault at the moment
-            #drmaa2_lib.drmaa2_msession_free(self._struct_p)
+            drmaa2_lib.drmaa2_msession_free(self._struct_p)
             self._struct = None
 
     def __del__(self):

@@ -22,6 +22,7 @@ import random
 from drmaa2 import MonitoringSession
 from drmaa2 import JobSession
 from drmaa2 import ReservationSession
+from drmaa2 import JobInfo
 from .utils import needs_uge
 
 @needs_uge
@@ -49,21 +50,22 @@ def test_get_all_machines():
     
 def test_get_all_jobs():
     js = JobSession('js-01')
-    j_name = 'job-%s' % int(random.uniform(0, 1000))
+    j_name = 'drmaa2python-%s' % int(random.uniform(0, 1000))
     j = js.run_job({'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : j_name})
     print('\nSubmitted job: %s' % j)
     ji = j.get_info()
-
+    j.wait_started()
     ms = MonitoringSession('ms-01')
     print('Opened monitoring session: %s' % ms.name)
-    print('Retrieving jobs matching job info %s' % ji)
-    j_list = ms.get_all_jobs(ji)
+    ji2 = JobInfo({'job_id' : ji.job_id})
+    print('Retrieving jobs matching job info %s' % ji2)
+    j_list = ms.get_all_jobs(ji2)
     print('Got all jobs: %s' % j_list)
     assert(len(j_list) >= 1)
 
 def test_get_all_reservatios():
     rs = ReservationSession('rs-01')
-    r_name = 'res-%s' % int(random.uniform(0, 1000))
+    r_name = 'drmaa2python-%s' % int(random.uniform(0, 1000))
     d = {'reservation_name' : r_name, 'duration' : 100}
     r = rs.request_reservation(d)
     print('\nCreated reservation: %s' % r)

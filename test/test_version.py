@@ -39,4 +39,9 @@ def test_to_dict():
 def test_get_implementation_specific_keys():
     keys = Version.get_implementation_specific_keys()
     assert(keys is not None)
-    print('\nVersion object has %s impl specific keys.' % (len(keys)))
+    print('\nVersion object has %s impl specific keys %s.' % (len(keys), keys))
+
+def test_get_implementation_specific_attrs():
+    attrs = Version.get_implementation_specific_attrs()
+    assert(attrs is not None)
+    print('\nVersion object has %s impl specific attrs %s.' % (len(attrs), attrs))

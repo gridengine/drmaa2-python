@@ -22,9 +22,9 @@ from drmaa2 import JobSession
 from drmaa2 import JobState
 
 def test_get_info():
-    session_name = generate_random_string()
+    session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
-    job_name = 'a-%s' % generate_random_string()
+    job_name = 'drmaa2python-%s' % generate_random_string()
     d = {'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : job_name}
     j = js.run_job(d)
     ji = j.get_info()
@@ -32,9 +32,9 @@ def test_get_info():
     print('\nGet info: %s' % (ji))
 
 def test_get_state():
-    session_name = generate_random_string()
+    session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
-    job_name = 'a.%s' % generate_random_string()
+    job_name = 'drmaa2python-%s' % generate_random_string()
     d = {'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : job_name}
     j = js.run_job(d)
     (j_state,j_sub_state) = j.get_state()
@@ -42,21 +42,27 @@ def test_get_state():
     print('\nGet state %s for job %s' % (j_state,j))
 
 def test_terminate():
-    session_name = generate_random_string()
+    session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
-    j = js.run_job({'remote_command' : '/bin/sleep', 'args' : ['100']})
+    job_name = 'drmaa2python-%s' % generate_random_string()
+    d = {'remote_command' : '/bin/sleep', 'args' : ['100'], 'job_name' : job_name}
+    j = js.run_job(d)
     ji = j.get_info()
     assert(ji.terminating_signal is None)
     j.wait_started()
     j.terminate()
+    j.wait_terminated()
     ji = j.get_info()
     assert(ji.terminating_signal is not None)
     print('\nTerminate job: %s' % (ji))
 
 def test_suspend_and_resume():
-    session_name = generate_random_string()
+    session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
-    j = js.run_job({'remote_command' : '/bin/sleep', 'args' : ['10']})
+    job_name = 'drmaa2python-%s' % generate_random_string()
+    d = {'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : job_name}
+    j = js.run_job(d)
+    j.wait_started()
     ji = j.get_info()
     assert(ji.job_state != JobState.SUSPENDED.name)
     j.suspend()
@@ -69,9 +75,11 @@ def test_suspend_and_resume():
     print('Resume job: %s' % (ji))
 
 def test_hold_and_release():
-    session_name = generate_random_string()
+    session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
-    j = js.run_job({'remote_command' : '/bin/sleep', 'args' : ['10']})
+    job_name = 'drmaa2python-%s' % generate_random_string()
+    d = {'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : job_name}
+    j = js.run_job(d)
     ji = j.get_info()
     assert(not ji.job_state.endswith('HELD'))
     j.hold()
@@ -84,27 +92,31 @@ def test_hold_and_release():
     print('Release job: %s' % (ji))
 
 def test_wait_started():
-    session_name = generate_random_string()
+    session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
-    j = js.run_job({'remote_command' : '/bin/sleep', 'args' : ['10']})
+    job_name = 'drmaa2python-%s' % generate_random_string()
+    d = {'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : job_name}
+    j = js.run_job(d)
     j.wait_started()
     s,ss = j.get_state()
     assert(s == JobState.RUNNING)
     print('\nWait started for job: %s' % (j))
 
 def test_wait_terminated():
-    session_name = generate_random_string()
+    session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
-    j = js.run_job({'remote_command' : '/bin/sleep', 'args' : ['10']})
+    job_name = 'drmaa2python-%s' % generate_random_string()
+    d = {'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : job_name}
+    j = js.run_job(d)
     j.wait_terminated()
     s,ss = j.get_state()
     assert(s == JobState.DONE)
     print('\nWait terminated for job: %s' % (j))
 
 def test_get_template():
-    session_name = generate_random_string()
+    session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
-    job_name = 'a.%s' % generate_random_string()
+    job_name = 'drmaa2python-%s' % generate_random_string()
     d = {'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : job_name}
     j = js.run_job(d)
     jt = j.get_template()

@@ -20,7 +20,7 @@
 from ctypes import POINTER
 from ctypes import pointer
 
-from .drmaa2_constants import JobState
+from .drmaa2_constants import *
 from .drmaa2_ctypes import drmaa2_jinfo
 from .drmaa2_object import Drmaa2Object
 #from .drmaa2_slot_info_list_descriptor import Drmaa2SlotInfoListDescriptor
@@ -54,7 +54,7 @@ class JobInfo(Drmaa2Object):
     """ Number of job slots (long). """
     queue_name = Drmaa2Object.StringDescriptor('queueName')
     """ Queue name (str). """
-    wallclock_time = Drmaa2Object.LongLongDescriptor('wallclockTime')
+    wallclock_time = Drmaa2Object.TimeDescriptor('wallclockTime')
     """ Wallclock time (long). """
     cpu_time = Drmaa2Object.LongLongDescriptor('cpuTime')
     """ CPU time (long). """
@@ -89,6 +89,7 @@ class JobInfo(Drmaa2Object):
             self._struct = POINTER(drmaa2_jinfo)()
             self._struct.contents = drmaa2_jinfo()
             #self._struct = self.get_drmaa2_library().drmaa2_jinfo_create()
+            self.__init_defaults()
             self.init_impl_spec_key_values()
             self.from_dict(job_info)
         elif isinstance(job_info, POINTER(drmaa2_jinfo)):
@@ -100,6 +101,18 @@ class JobInfo(Drmaa2Object):
         #self.get_drmaa2_library().drmaa2_jinfo_free(pointer(self._struct))
         pass
    
+    def __init_defaults(self):
+        self.job_id = None
+        self.wallclock_time = UNSET_TIME
+        self.exit_status = UNSET_NUM
+        self.finish_time = UNSET_TIME
+        self.job_state = JobState.UNSET_JSTATE
+        self.submission_time = UNSET_TIME
+        self.slots = UNSET_NUM
+        self.dispatch_time = UNSET_TIME
+        self.cpu_time = UNSET_NUM
+        self.allocated_machines = None
+
     @classmethod
     def get_implementation_specific_keys(cls):
         """

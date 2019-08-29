@@ -29,7 +29,7 @@ from drmaa2.drmaa2_constants import POSIX_EPOCH
 def test_job_info_from_job():
     session_name = generate_random_string()
     js = JobSession(session_name)
-    job_name = 'a.%s' % generate_random_string()
+    job_name = 'drmaa2python-%s' % generate_random_string()
     d = {'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : job_name}
     j = js.run_job(d)
     ji = j.get_info()
@@ -130,7 +130,7 @@ def test_queue_name_attr():
 
 def test_wallclock_time_attr():
     ji = JobInfo()
-    wallclock_time = generate_random_int(lower_bound=0, upper_bound=86400)
+    wallclock_time = datetime.datetime.fromtimestamp(generate_random_int(lower_bound=0, upper_bound=12386400))
     ji.wallclock_time = wallclock_time
     assert(ji.wallclock_time == wallclock_time)
     print('\nJob info with wallclock_time: %s' % (wallclock_time))

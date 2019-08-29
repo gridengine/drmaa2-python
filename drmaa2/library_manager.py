@@ -209,6 +209,9 @@ class LibraryManager(Singleton):
         drmaa2_lib.uge_drmaa2_list_set.restype = drmaa2_error
         drmaa2_lib.uge_drmaa2_list_set.argtypes = [drmaa2_list, c_long, c_void_p]
 
+        drmaa2_lib.uge_vi_impl_spec_get.restype = drmaa2_dict
+        drmaa2_lib.uge_vi_impl_spec_get.argtypes = [POINTER(drmaa2_version)]
+
         drmaa2_lib.drmaa2_dict_create.restype = drmaa2_dict
         drmaa2_lib.drmaa2_dict_create.argtypes = [drmaa2_dict_entryfree]
         drmaa2_lib.drmaa2_dict_free.restype = None
@@ -247,17 +250,17 @@ class LibraryManager(Singleton):
         drmaa2_lib.drmaa2_rtemplate_free.restype = None
         drmaa2_lib.drmaa2_rtemplate_free.argtypes = [POINTER(POINTER(drmaa2_rtemplate))]
 
-        drmaa2_lib.drmaa2_notification_free.restype = None
-        drmaa2_lib.drmaa2_notification_free.argtypes = [POINTER(POINTER(drmaa2_notification))]
-
         drmaa2_lib.drmaa2_queueinfo_free.restype = None
         drmaa2_lib.drmaa2_queueinfo_free.argtypes = [POINTER(POINTER(drmaa2_queueinfo))]
 
-        drmaa2_lib.drmaa2_version_free.restype = None
-        drmaa2_lib.drmaa2_version_free.argtypes = [POINTER(POINTER(drmaa2_version))]
-
         drmaa2_lib.drmaa2_machineinfo_free.restype = None
         drmaa2_lib.drmaa2_machineinfo_free.argtypes = [POINTER(POINTER(drmaa2_machineinfo))]
+
+        drmaa2_lib.drmaa2_notification_free.restype = None
+        drmaa2_lib.drmaa2_notification_free.argtypes = [POINTER(POINTER(drmaa2_notification))]
+
+        drmaa2_lib.drmaa2_version_free.restype = None
+        drmaa2_lib.drmaa2_version_free.argtypes = [POINTER(POINTER(drmaa2_version))]
 
         drmaa2_lib.drmaa2_jtemplate_impl_spec.restype = drmaa2_string_list
         drmaa2_lib.drmaa2_jtemplate_impl_spec.argtypes = []
@@ -273,6 +276,8 @@ class LibraryManager(Singleton):
         drmaa2_lib.drmaa2_machineinfo_impl_spec.argtypes = []
         drmaa2_lib.drmaa2_notification_impl_spec.restype = drmaa2_string_list
         drmaa2_lib.drmaa2_notification_impl_spec.argtypes = []
+        drmaa2_lib.drmaa2_version_impl_spec.restype = drmaa2_string_list
+        drmaa2_lib.drmaa2_version_impl_spec.argtypes = []
 
         drmaa2_lib.drmaa2_get_instance_value.restype = drmaa2_string
         drmaa2_lib.drmaa2_get_instance_value.argtypes = [c_void_p, c_char_p]
@@ -313,10 +318,10 @@ class LibraryManager(Singleton):
         drmaa2_lib.drmaa2_r_get_id.argtypes = [drmaa2_r]
         drmaa2_lib.drmaa2_r_get_session_name.restype = drmaa2_string
         drmaa2_lib.drmaa2_r_get_session_name.argtypes = [drmaa2_r]
-        drmaa2_lib.drmaa2_r_get_rtemplate.restype = POINTER(drmaa2_rtemplate)
-        drmaa2_lib.drmaa2_r_get_rtemplate.argtypes = [POINTER(drmaa2_r)]
         #drmaa2_lib.drmaa2_r_get_reservation_template.restype = POINTER(drmaa2_rtemplate)
         #drmaa2_lib.drmaa2_r_get_reservation_template.argtypes = [POINTER(drmaa2_r)]
+        drmaa2_lib.drmaa2_r_get_rtemplate.restype = POINTER(drmaa2_rtemplate)
+        drmaa2_lib.drmaa2_r_get_rtemplate.argtypes = [POINTER(drmaa2_r)]
         drmaa2_lib.drmaa2_r_get_info.restype = POINTER(drmaa2_rinfo)
         drmaa2_lib.drmaa2_r_get_info.argtypes = [POINTER(drmaa2_r)]
         drmaa2_lib.drmaa2_r_terminate.restype = drmaa2_error

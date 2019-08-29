@@ -67,6 +67,7 @@ class Drmaa2Object(object):
     logger = LogManager.get_instance().get_logger('Drmaa2Object')
     drmaa2_lib = None
     implementation_specific_keys = None
+    implementation_specific_attrs = None
     attribute_names = None
 
     def __init__(self, struct=None):
@@ -200,6 +201,26 @@ class Drmaa2Object(object):
     def __repr__(self):
         """ Object representation. """
         return '%s(%s)' % (self.__class__.__name__,self.__str__())
+
+    @classmethod
+    def to_py_dict(cls, ctypes_dict):
+        py_dict = dict()
+        if ctypes_dict:
+            drmaa2_lib = cls.get_drmaa2_library()
+            ctypes_list = drmaa2_lib.drmaa2_dict_list(ctypes_dict)
+            list_size = drmaa2_lib.drmaa2_list_size(ctypes_list)
+            if list_size < 0:
+                ExceptionMapper.check_last_error_code()
+            for i in range(list_size):
+                void_ptr = drmaa2_lib.drmaa2_list_get(ctypes_list, i)
+                key_ptr = cast(void_ptr, drmaa2_string).value
+                value_ptr = drmaa2_lib.drmaa2_dict_get(ctypes_dict, key_ptr)
+                key = ByteString(key_ptr).decode()
+                value = ByteString(value_ptr).decode()
+                py_dict[key] = value
+            drmaa2_lib.drmaa2_list_free(pointer(c_void_p(ctypes_list)))
+            drmaa2_lib.drmaa2_dict_free(pointer(c_void_p(ctypes_dict)))
+        return py_dict
 
     @classmethod
     def to_py_string_list(cls, ctypes_list):

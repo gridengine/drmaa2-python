@@ -78,8 +78,7 @@ class MachineInfo(Drmaa2Object):
             self.virt_memory = getattr(machine_info.contents, 'virtMemory')
             self.machine_arch = getattr(machine_info.contents, 'machineArch')
             self.machine_os_version = getattr(machine_info.contents, 'machineOSVersion')
-            # Retrieving machine os does not work.
-            #self.machine_os = getattr(machine_info.contents, 'machineOS')
+            self.machine_os = getattr(machine_info.contents, 'machineOS')
             self.implementation_specific = getattr(machine_info.contents, 'implementationSpecific')
         else:
             raise InvalidArgument('Invalid argument: %s' % str(machine_info))
@@ -117,7 +116,7 @@ class MachineInfo(Drmaa2Object):
                     py_machine_info_list.append(mi)
                 else:
                     ExceptionMapper.check_last_error_code()
-                    py_machine_info_list.append(None)
+                    # py_machine_info_list.append(None)
         return py_machine_info_list
 
  

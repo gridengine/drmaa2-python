@@ -55,6 +55,19 @@ class drmaa2_string(c_char_p):
 
     python_version = platform.python_version_tuple()[0]
 
+#    def __init__(self, **kwargs):
+#        """
+#        Ctypes.Structure with integrated default values.
+#
+#        :param kwargs: values different to defaults
+#        :type kwargs: dict
+#        """
+#        values = type(self)._defaults_.copy()
+#        for (key, val) in kwargs.items():
+#            values[key] = val
+#        super().__init__(**values)
+
+
     def __eq__(self, other):
         if isinstance(other, str):
             if self.python_version == '2':
@@ -220,7 +233,7 @@ class drmaa2_machineinfo(drmaa2_struct):
                 ("physMemory", c_longlong),
                 ("virtMemory", c_longlong),
                 ("machineArch", drmaa2_cpu),
-                ("machineOSVersion", drmaa2_version),
+                ("machineOSVersion", POINTER(drmaa2_version)),
                 ("machineOS", drmaa2_os),
                 ("implementationSpecific", c_void_p)]
 

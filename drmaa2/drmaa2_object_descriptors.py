@@ -153,6 +153,7 @@ class Drmaa2TimeDescriptor(Drmaa2Descriptor):
                 return t.name
         except ValueError:
             return datetime.datetime.utcfromtimestamp(value)
+            #return datetime.datetime.fromtimestamp(value)
 
     def __set__(self, obj, value):
         if not self.can_write(obj):
