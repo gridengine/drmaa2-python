@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,17 +15,18 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from drmaa2 import JobTemplate
 
 if __name__ == '__main__':
     import datetime
+
     print('Impl. spec. keys: %s' % JobTemplate.get_implementation_specific_keys())
-    jt = JobTemplate({'remote_command' : '/bin/sleep'})
+    jt = JobTemplate({'remote_command': '/bin/sleep'})
     print('Initial job template: %s' % jt)
     jt.args = ['200']
-    jt.job_environment = {'MY_ENV' : 'xyz', 'MY_ENV2' : 'xyz2'}
+    jt.job_environment = {'MY_ENV': 'xyz', 'MY_ENV2': 'xyz2'}
     jt.rerunnable = True
     jt.submit_as_hold = True
     jt.queue_name = 'all.q'
@@ -38,4 +39,3 @@ if __name__ == '__main__':
     print('Impl. spec. key uge_jt_pe is set to: %s' % jt.get_impl_spec_key_value('uge_jt_pe'))
     print('Impl. spec dictionary: %s' % jt.implementation_specific)
     print('Final job template: %s' % jt)
-

@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import random
 from drmaa2 import JobSession
@@ -26,13 +26,12 @@ if __name__ == '__main__':
     js = JobSession('js-01')
     print('Created job session: %s' % js.name)
     j_name = 'job-%s' % int(random.uniform(0, 1000))
-    j = js.run_job({'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : j_name})
+    j = js.run_job({'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': j_name})
     print('Submitted job: %s' % j)
-    #ji = j.get_info()
-    ji = JobInfo({'job_name' : j_name})
+    # ji = j.get_info()
+    ji = JobInfo({'job_name': j_name})
     ms = MonitoringSession('ms-01')
     print('Opened monitoring session: %s' % ms.name)
     print('Retrieving jobs matching job info %s' % ji)
     j_list = ms.get_all_jobs(ji)
     print('Got all jobs: %s' % j_list)
-

@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,15 +15,16 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import datetime
 from drmaa2 import ReservationInfo
 
 if __name__ == '__main__':
     import datetime
+
     print('Impl. spec. keys: %s' % ReservationInfo.get_implementation_specific_keys())
-    ri = ReservationInfo({'reservation_name' : 'rs-01'})
+    ri = ReservationInfo({'reservation_name': 'rs-01'})
     print('Initial reservation info: %s' % ri)
     ri.reservation_id = 'rid-01'
     ri.users_acl = ['user1', 'user2', 'user3']
@@ -34,4 +35,3 @@ if __name__ == '__main__':
     print('Impl. spec. key uge_ri_ar_json is set to: %s' % ri.get_impl_spec_key_value('uge_ri_ar_json'))
     print('Impl. spec dictionary: %s' % ri.implementation_specific)
     print('Final reservation info: %s' % ri)
-

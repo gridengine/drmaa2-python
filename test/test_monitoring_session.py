@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import os
 import random
@@ -25,48 +25,52 @@ from drmaa2 import ReservationSession
 from drmaa2 import JobInfo
 from .utils import needs_uge
 
+
 @needs_uge
 def test_get_all_queues():
     q_name_list = os.popen('qconf -sql').read().split()
     print('\nGot queue list: %s' % q_name_list)
     ms = MonitoringSession('ms-01')
     qi_list = ms.get_all_queues(q_name_list)
-    assert(len(qi_list) == len(q_name_list))
+    assert (len(qi_list) == len(q_name_list))
     for qi in qi_list:
         q_name = qi.name
         print('Checking queue: %s' % (qi.to_dict()))
-        assert(q_name in q_name_list)
-    
+        assert (q_name in q_name_list)
+
+
 def test_get_all_machines():
     h_name_list = os.popen('qconf -sel').read().split()
     print('\nGot host list: %s' % h_name_list)
     ms = MonitoringSession('ms-01')
     mi_list = ms.get_all_machines(h_name_list)
-    assert(len(mi_list) == len(h_name_list))
+    assert (len(mi_list) == len(h_name_list))
     for mi in mi_list:
         h_name = mi.name
         print('Checking machine: %s' % (mi.to_dict()))
-        assert(h_name in h_name_list)
-    
+        assert (h_name in h_name_list)
+
+
 def test_get_all_jobs():
     js = JobSession('js-01')
     j_name = 'drmaa2python-%s' % int(random.uniform(0, 1000))
-    j = js.run_job({'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : j_name})
+    j = js.run_job({'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': j_name})
     print('\nSubmitted job: %s' % j)
     ji = j.get_info()
     j.wait_started()
     ms = MonitoringSession('ms-01')
     print('Opened monitoring session: %s' % ms.name)
-    ji2 = JobInfo({'job_id' : ji.job_id})
+    ji2 = JobInfo({'job_id': ji.job_id})
     print('Retrieving jobs matching job info %s' % ji2)
     j_list = ms.get_all_jobs(ji2)
     print('Got all jobs: %s' % j_list)
-    assert(len(j_list) >= 1)
+    assert (len(j_list) >= 1)
+
 
 def test_get_all_reservatios():
     rs = ReservationSession('rs-01')
     r_name = 'drmaa2python-%s' % int(random.uniform(0, 1000))
-    d = {'reservation_name' : r_name, 'duration' : 100}
+    d = {'reservation_name': r_name, 'duration': 100}
     r = rs.request_reservation(d)
     print('\nCreated reservation: %s' % r)
     ri = r.get_info()
@@ -78,7 +82,4 @@ def test_get_all_reservatios():
     print('Retrieving reservations matching reservation info %s' % ri)
     r_list = ms.get_all_reservations(ri)
     print('Got all reservations: %s' % r_list)
-    assert(len(r_list) == 1)
-
-
-
+    assert (len(r_list) == 1)

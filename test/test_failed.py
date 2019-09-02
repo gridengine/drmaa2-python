@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,32 +15,33 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from .utils import generate_random_string
 from drmaa2 import JobSession
 from drmaa2 import JobState
 
+
 def test_get_info():
     session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
     job_name = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : job_name}
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name}
     j = js.run_job(d)
     ji = j.get_info()
-    assert(ji.job_name == job_name)
+    assert (ji.job_name == job_name)
     print('\nGet info: %s' % (ji))
+
 
 def test_wait_terminated():
     session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
     job_name = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command' : '/bin/sleep', 'args' : ['10'], 'job_name' : job_name}
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name}
     j = js.run_job(d)
     j.wait_terminated()
-    s,ss = j.get_state()
-    assert(s == JobState.DONE)
+    s, ss = j.get_state()
+    assert (s == JobState.DONE)
     print('\nWait terminated for job: %s' % (j))
     ji = j.get_info()
     print('\nGet info: %s' % (ji))
-

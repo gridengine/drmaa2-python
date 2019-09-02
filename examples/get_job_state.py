@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from drmaa2 import JobSession
 from drmaa2 import JobState
@@ -23,8 +23,7 @@ from drmaa2 import JobState
 if __name__ == '__main__':
     js = JobSession('js-01')
     print('Created job session: %s' % js.name)
-    j = js.run_job({'remote_command' : '/bin/sleep', 'args' : ['100']})
+    j = js.run_job({'remote_command': '/bin/sleep', 'args': ['100']})
     print('Submitted job: %s' % j)
-    (js,substate) = j.get_state()
+    (js, substate) = j.get_state()
     print('Retrieved job state: %s' % js)
-

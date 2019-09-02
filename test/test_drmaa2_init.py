@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,48 +15,54 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
-import drmaa2 
+import drmaa2
+
 
 def test_get_drms_version():
     v = drmaa2.get_drms_version()
-    assert(v.major != '' and v.minor != '')
+    assert (v.major != '' and v.minor != '')
     print('\nGot DRMS version: %s' % (v))
+
 
 def test_get_drmaa_version():
     v = drmaa2.get_drmaa_version()
-    assert(v.major != '' and v.minor != '')
+    assert (v.major != '' and v.minor != '')
     print('\nGot DRMAA version: %s' % (v))
+
 
 def test_get_drms_name():
     n = drmaa2.get_drms_name()
-    assert(n != '')
+    assert (n != '')
     print('\nGot DRMS name: %s' % (n))
+
 
 def test_get_drmaa_name():
     n = drmaa2.get_drmaa_name()
-    assert(n != '')
+    assert (n != '')
     print('\nGot DRMAA name: %s' % (n))
+
 
 def test_drmaa_supports():
     print('\nVerifying support for %s capabilities' % (len(drmaa2.Capability)))
     supported = []
     for c in drmaa2.Capability:
-        s = drmaa2.drmaa_supports(c) 
+        s = drmaa2.drmaa_supports(c)
         if s:
             supported.append(s)
         print('Support for %s: %s' % (c, s))
-    assert(len(supported) > 0)
+    assert (len(supported) > 0)
     print('DRMAA2 supports %s out of %s capabilities' % (len(supported), len(drmaa2.Capability)))
+
 
 def test_get_job_session_names():
     sessions = drmaa2.get_job_session_names()
-    assert(type(sessions) == type([]))
+    assert (type(sessions) == type([]))
     print('\nGot %s job sessions: %s' % (len(sessions), sessions))
+
 
 def test_get_reservation_session_names():
     sessions = drmaa2.get_reservation_session_names()
-    assert(type(sessions) == type([]))
+    assert (type(sessions) == type([]))
     print('\nGot %s reservation sessions: %s' % (len(sessions), sessions))
-

@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,20 +15,20 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from drmaa2 import Capability
 from drmaa2 import Version
 from drmaa2 import LibraryManager
 
 # The following are also available as drmaa2 module methods
-#get_drms_name 
-#get_drmaa_name
-#drmaa_supports
-#get_drms_version
-#get_drmaa_version
-#get_job_session_names
-#get_reservation_session_names
+# get_drms_name
+# get_drmaa_name
+# drmaa_supports
+# get_drms_version
+# get_drmaa_version
+# get_job_session_names
+# get_reservation_session_names
 
 if __name__ == '__main__':
     lm = LibraryManager.get_instance()
@@ -43,5 +43,3 @@ if __name__ == '__main__':
     print('DRMS Version: %s' % drms_version)
     drmaa_version = Version.get_drmaa_version()
     print('DRMAA Version: %s' % drmaa_version)
-
-

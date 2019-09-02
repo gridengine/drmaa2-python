@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import random
 from drmaa2 import ReservationInfo
@@ -26,11 +26,11 @@ if __name__ == '__main__':
     rs = ReservationSession('rs-01')
     print('Created reservation session: %s' % rs.name)
     r_name = 'res-%s' % int(random.uniform(0, 1000))
-    d = {'reservation_name' : r_name, 'duration' : 100}
+    d = {'reservation_name': r_name, 'duration': 100}
     r = rs.request_reservation(d)
     print('Created reservation: %s' % r)
-    #ri = r.get_info()
-    ri = ReservationInfo({'reservation_name' : r_name})
+    # ri = r.get_info()
+    ri = ReservationInfo({'reservation_name': r_name})
     # At the moment one cannot have both reservation and monitoring 
     # sessions opened at the same time
     rs.close()
@@ -40,4 +40,3 @@ if __name__ == '__main__':
     print('Retrieving reservations matching reservation info %s' % ri)
     r_list = ms.get_all_reservations(ri)
     print('Got all reservations: %s' % r_list)
-

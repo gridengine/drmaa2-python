@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,14 +15,14 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from drmaa2 import JobSession
 
 if __name__ == '__main__':
     js = JobSession('js-01')
     print('Created job session: %s' % js.name)
-    d = {'remote_command' : '/bin/sleep', 'args' : ['10']}
+    d = {'remote_command': '/bin/sleep', 'args': ['10']}
     print('Running job array using dictionary: %s' % d)
     begin_index = 1
     end_index = 10
@@ -34,4 +34,3 @@ if __name__ == '__main__':
     jl = ja.job_list
     jl2 = js.wait_all_started(jl)
     print('Jobs terminated: %s' % jl2)
-

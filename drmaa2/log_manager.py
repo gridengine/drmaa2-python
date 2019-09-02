@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,11 +15,12 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import os
 import logging
 from .singleton import Singleton
+
 
 class LogManager(Singleton):
     """ 
@@ -31,12 +32,12 @@ class LogManager(Singleton):
 
     LOG_LEVEL_ENV_VAR = 'DRMAA2_LOG_LEVEL'
     LOG_LEVEL_MAP = {
-        'CRITICAL' : logging.CRITICAL,
-        'ERROR' : logging.ERROR,
-        'WARNING' : logging.WARNING,
-        'INFO' : logging.INFO,
-        'DEBUG' : logging.DEBUG,
-        'NOTSET' : logging.NOTSET,
+        'CRITICAL': logging.CRITICAL,
+        'ERROR': logging.ERROR,
+        'WARNING': logging.WARNING,
+        'INFO': logging.INFO,
+        'DEBUG': logging.DEBUG,
+        'NOTSET': logging.NOTSET,
     }
     LOG_MESSAGE_FORMAT = '%(asctime)s %(levelname)s %(filename)s:%(lineno)d:  %(message)s'
 
@@ -65,10 +66,10 @@ class LogManager(Singleton):
         level = level or os.environ.get(self.LOG_LEVEL_ENV_VAR)
         if level:
             log_level = self.LOG_LEVEL_MAP.get(level.upper(), logging.NOTSET)
-            logging.basicConfig(level=log_level,format=self.LOG_MESSAGE_FORMAT)
+            logging.basicConfig(level=log_level, format=self.LOG_MESSAGE_FORMAT)
         else:
             logging.basicConfig(format=self.LOG_MESSAGE_FORMAT)
-            
+
     @classmethod
     def get_logger(cls, name=None):
         """ 
@@ -83,4 +84,3 @@ class LogManager(Singleton):
         """
         name = name or cls.__name__
         return logging.getLogger(name)
-

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import atexit
 from ctypes import POINTER
@@ -29,6 +29,7 @@ from .drmaa2_exceptions import InvalidArgument
 
 from .log_manager import LogManager
 from .exception_mapper import ExceptionMapper
+
 
 class Notification(Drmaa2Object):
     """ High-level DRMAA2 notification class. """
@@ -65,7 +66,7 @@ class Notification(Drmaa2Object):
 
     def __del__(self):
         pass
-   
+
     @classmethod
     def get_implementation_specific_keys(cls):
         """
@@ -77,16 +78,19 @@ class Notification(Drmaa2Object):
         []
         """
         if cls.implementation_specific_keys is None:
-            cls.implementation_specific_keys = cls.to_py_string_list(cls.get_drmaa2_library().drmaa2_notification_impl_spec())
+            cls.implementation_specific_keys = cls.to_py_string_list(
+                cls.get_drmaa2_library().drmaa2_notification_impl_spec())
         return cls.implementation_specific_keys
 
     @classmethod
     def event_callback(cls, callback):
         """ Wrap actual python callback. """
+
         def wrapper(notification_ptr):
             notification = Notification(notification_ptr.contents)
             callback(notification)
             cls.get_drmaa2_library().drmaa2_notification_free(notification_ptr)
+
         return wrapper
 
     @classmethod
@@ -116,4 +120,3 @@ class Notification(Drmaa2Object):
         callback_p = drmaa2_callback()
         cls.logger.debug("Unregistering notification callback {}".format(callback_p))
         ExceptionMapper.check_status_code(cls.get_drmaa2_library().drmaa2_register_event_notification(callback_p))
-

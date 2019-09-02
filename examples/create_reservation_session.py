@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from drmaa2 import ReservationSession
 
@@ -33,4 +33,3 @@ if __name__ == '__main__':
     print('Got session object: %s' % rs2)
     session_names2 = ReservationSession.list_session_names()
     print('Current session names: %s' % session_names2)
-

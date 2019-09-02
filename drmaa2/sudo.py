@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 """
 Sudo class.
@@ -24,6 +24,7 @@ Sudo class.
 from ctypes import POINTER
 from .drmaa2_ctypes import drmaa2_sudo
 from .drmaa2_object import Drmaa2Object
+
 
 class Sudo(Drmaa2Object):
     """ High-level DRMAA2 sudo class. """
@@ -72,4 +73,3 @@ class Sudo(Drmaa2Object):
 
     def __del__(self):
         pass
-

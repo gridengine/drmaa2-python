@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import getpass
 from uuid import uuid4
@@ -37,6 +37,7 @@ from .log_manager import LogManager
 from .exception_mapper import ExceptionMapper
 from .drmaa2_exceptions import Drmaa2Exception
 
+
 class JobSession(Drmaa2Object):
     """ High-level DRMAA2 job session class. """
 
@@ -48,7 +49,8 @@ class JobSession(Drmaa2Object):
     logger = LogManager.get_instance().get_logger('JobSession')
     exception_mapper = ExceptionMapper()
 
-    def __init__(self, name=None, contact=None, destroy_on_exit=True, check_for_existing_session=True, session_dict={}, auth=None):
+    def __init__(self, name=None, contact=None, destroy_on_exit=True, check_for_existing_session=True, session_dict={},
+                 auth=None):
         """ 
         Constructor. If the session with a given name does not already exist, 
         it will create a new one; otherwise, it will open the existing session.
@@ -84,18 +86,18 @@ class JobSession(Drmaa2Object):
         contact = contact or session_dict.get('contact') or drmaa2_string()
         create_new_session = True
         if check_for_existing_session:
-             existing_session_names = self.list_session_names()
-             session_names_to_check = [name]
-             if contact:
-                 session_names_to_check.append('%s@%s' % (contact,name))
-             else:
-                 session_names_to_check.append('%s@%s' % (getpass.getuser(),name))
-             for n in session_names_to_check:
-                 if n in existing_session_names:
-                     name = n
-                     self.logger.debug('Discovered existing job session with name {}'.format(n))
-                     create_new_session = False
-                     break
+            existing_session_names = self.list_session_names()
+            session_names_to_check = [name]
+            if contact:
+                session_names_to_check.append('%s@%s' % (contact, name))
+            else:
+                session_names_to_check.append('%s@%s' % (getpass.getuser(), name))
+            for n in session_names_to_check:
+                if n in existing_session_names:
+                    name = n
+                    self.logger.debug('Discovered existing job session with name {}'.format(n))
+                    create_new_session = False
+                    break
 
         self._name_bs = ByteString()
         self._auth = auth
@@ -124,9 +126,11 @@ class JobSession(Drmaa2Object):
         if auth:
             auth = Sudo.create_from_dict(auth)
             self.logger.debug('Using sudo object: {}'.format(auth))
-            struct = self.get_drmaa2_library().drmaa2_create_jsession_as(auth._struct, ByteString(name).encode(), ByteString(contact).encode())
+            struct = self.get_drmaa2_library().drmaa2_create_jsession_as(auth._struct, ByteString(name).encode(),
+                                                                         ByteString(contact).encode())
         else:
-            struct = self.get_drmaa2_library().drmaa2_create_jsession(ByteString(name).encode(), ByteString(contact).encode())
+            struct = self.get_drmaa2_library().drmaa2_create_jsession(ByteString(name).encode(),
+                                                                      ByteString(contact).encode())
         if not struct:
             self.exception_mapper.check_last_error_code()
         return struct
@@ -184,9 +188,11 @@ class JobSession(Drmaa2Object):
         if auth:
             auth = Sudo.create_from_dict(auth)
             self.logger.debug('Using sudo object: {}'.format(auth))
-            self.exception_mapper.check_status_code(self.get_drmaa2_library().drmaa2_destroy_jsession_as(auth._struct, self._name_bs.encode()))
+            self.exception_mapper.check_status_code(
+                self.get_drmaa2_library().drmaa2_destroy_jsession_as(auth._struct, self._name_bs.encode()))
         else:
-            self.exception_mapper.check_status_code(self.get_drmaa2_library().drmaa2_destroy_jsession(self._name_bs.encode()))
+            self.exception_mapper.check_status_code(
+                self.get_drmaa2_library().drmaa2_destroy_jsession(self._name_bs.encode()))
 
     @classmethod
     def destroy_by_name(cls, name, auth=None):
@@ -205,9 +211,11 @@ class JobSession(Drmaa2Object):
         if auth:
             auth = Sudo.create_from_dict(auth)
             self.logger.debug('Using sudo object: {}'.format(auth))
-            cls.exception_mapper.check_status_code(cls.get_drmaa2_library().drmaa2_destroy_jsession_as(auth._struct, ByteString(name).encode()))
+            cls.exception_mapper.check_status_code(
+                cls.get_drmaa2_library().drmaa2_destroy_jsession_as(auth._struct, ByteString(name).encode()))
         else:
-            cls.exception_mapper.check_status_code(cls.get_drmaa2_library().drmaa2_destroy_jsession(ByteString(name).encode()))
+            cls.exception_mapper.check_status_code(
+                cls.get_drmaa2_library().drmaa2_destroy_jsession(ByteString(name).encode()))
 
     def __del__(self):
         """ Destructor. """
@@ -288,16 +296,20 @@ class JobSession(Drmaa2Object):
         >>> type(ja)
         <class 'drmaa2.job_array.JobArray'>
         """
-        self.logger.debug('Running an array job with task indices ({},{},{}), max. parallel {}, and using template: {}'.format(begin_index, end_index, step, max_parallel, template))
+        self.logger.debug(
+            'Running an array job with task indices ({},{},{}), max. parallel {}, and using template: {}'.format(
+                begin_index, end_index, step, max_parallel, template))
         drmaa2_lib = self.get_drmaa2_library()
         template = JobTemplate.create_from_dict(template)
 
         if auth:
             auth = Sudo.create_from_dict(auth)
             self.logger.debug('Using sudo object: {}'.format(auth))
-            ctypes_job_array = drmaa2_lib.drmaa2_jsession_run_bulk_jobs_as(auth._struct, self._struct, template._struct, begin_index, end_index, step, max_parallel)
+            ctypes_job_array = drmaa2_lib.drmaa2_jsession_run_bulk_jobs_as(auth._struct, self._struct, template._struct,
+                                                                           begin_index, end_index, step, max_parallel)
         else:
-            ctypes_job_array = drmaa2_lib.drmaa2_jsession_run_bulk_jobs(self._struct, template._struct, begin_index, end_index, step, max_parallel)
+            ctypes_job_array = drmaa2_lib.drmaa2_jsession_run_bulk_jobs(self._struct, template._struct, begin_index,
+                                                                        end_index, step, max_parallel)
         if not ctypes_job_array:
             self.exception_mapper.check_last_error_code()
         py_job_array = JobArray(ctypes_job_array)
@@ -391,7 +403,7 @@ class JobSession(Drmaa2Object):
         ctypes_job_list2 = drmaa2_lib.drmaa2_jsession_wait_all_started(self._struct, ctypes_job_list, int(timeout))
         if not ctypes_job_list2:
             self.exception_mapper.check_last_error_code()
-        py_job_list = Job.to_py_job_list(ctypes_job_list2) 
+        py_job_list = Job.to_py_job_list(ctypes_job_list2)
         self.logger.debug('All {} jobs started'.format(len(job_list)))
         drmaa2_lib.drmaa2_list_free(pointer(c_void_p(ctypes_job_list)))
         drmaa2_lib.drmaa2_list_free(pointer(c_void_p(ctypes_job_list2)))
@@ -422,7 +434,7 @@ class JobSession(Drmaa2Object):
         ctypes_job_list2 = drmaa2_lib.drmaa2_jsession_wait_all_terminated(self._struct, ctypes_job_list, int(timeout))
         if not ctypes_job_list2:
             self.exception_mapper.check_last_error_code()
-        py_job_list = Job.to_py_job_list(ctypes_job_list2) 
+        py_job_list = Job.to_py_job_list(ctypes_job_list2)
         self.logger.debug('All {} jobs terminated'.format(len(job_list)))
         drmaa2_lib.drmaa2_list_free(pointer(c_void_p(ctypes_job_list)))
         drmaa2_lib.drmaa2_list_free(pointer(c_void_p(ctypes_job_list2)))
@@ -488,6 +500,3 @@ class JobSession(Drmaa2Object):
             py_job_list = Job.to_py_job_list(ctypes_job_list)
             drmaa2_lib.drmaa2_list_free(pointer(c_void_p(ctypes_job_list)))
         return py_job_list
-
-
-

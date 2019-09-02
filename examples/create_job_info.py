@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,15 +15,16 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import datetime
 from drmaa2 import JobInfo
 
 if __name__ == '__main__':
     import datetime
+
     print('Impl. spec. keys: %s' % JobInfo.get_implementation_specific_keys())
-    ji = JobInfo({'queue_name' : 'all.q'})
+    ji = JobInfo({'queue_name': 'all.q'})
     print('Initial job info: %s' % ji)
     ji.job_id = '113'
     ji.job_name = 'job-01'
@@ -35,4 +36,3 @@ if __name__ == '__main__':
     print('Impl. spec. key uge_ji_priority is set to: %s' % ji.get_impl_spec_key_value('uge_ji_priority'))
     print('Impl. spec dictionary: %s' % ji.implementation_specific)
     print('Final job info: %s' % ji)
-

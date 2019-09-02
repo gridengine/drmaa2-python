@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from ctypes import POINTER
 from ctypes import pointer
@@ -27,6 +27,7 @@ from .drmaa2_ctypes import drmaa2_jtemplate
 from .drmaa2_ctypes import drmaa2_string
 from .drmaa2_object import Drmaa2Object
 from .drmaa2_exceptions import InvalidArgument
+
 
 class JobTemplate(Drmaa2Object):
     """ High-level DRMAA2 job template class. """
@@ -114,8 +115,8 @@ class JobTemplate(Drmaa2Object):
         Drmaa2Object.__init__(self)
         if isinstance(template, dict):
             self._struct = self.get_drmaa2_library().drmaa2_jtemplate_create()
-            #self._struct = POINTER(drmaa2_jtemplate)
-            #self._struct.contents = drmaa2_jtemplate()
+            # self._struct = POINTER(drmaa2_jtemplate)
+            # self._struct.contents = drmaa2_jtemplate()
             self.init_impl_spec_key_values()
             self.from_dict(template)
         elif isinstance(template, POINTER(drmaa2_jtemplate)):
@@ -148,6 +149,6 @@ class JobTemplate(Drmaa2Object):
         :returns: String list of implementation-specific keys.
         """
         if cls.implementation_specific_keys is None:
-            cls.implementation_specific_keys = cls.to_py_string_list(cls.get_drmaa2_library().drmaa2_jtemplate_impl_spec())
-        return cls.implementation_specific_keys 
-
+            cls.implementation_specific_keys = cls.to_py_string_list(
+                cls.get_drmaa2_library().drmaa2_jtemplate_impl_spec())
+        return cls.implementation_specific_keys

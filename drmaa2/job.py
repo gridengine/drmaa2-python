@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from ctypes import cast
 from ctypes import pointer
@@ -38,6 +38,7 @@ from .drmaa2_object import Drmaa2Object
 from .log_manager import LogManager
 from .exception_mapper import ExceptionMapper
 from .drmaa2_exceptions import InvalidArgument
+
 
 class Job(Drmaa2Object):
     """ High-level DRMAA2 job class. """
@@ -83,7 +84,7 @@ class Job(Drmaa2Object):
             ExceptionMapper.check_status_code(drmaa2_lib.drmaa2_j_suspend_as(auth._struct, self._struct))
         else:
             ExceptionMapper.check_status_code(drmaa2_lib.drmaa2_j_suspend(self._struct))
-    
+
     def resume(self, auth=None):
         """ 
         Resume the job.
@@ -104,7 +105,7 @@ class Job(Drmaa2Object):
             ExceptionMapper.check_status_code(drmaa2_lib.drmaa2_j_resume_as(auth._struct, self._struct))
         else:
             ExceptionMapper.check_status_code(drmaa2_lib.drmaa2_j_resume(self._struct))
-    
+
     def hold(self, auth=None):
         """ 
         Hold the job.
@@ -285,7 +286,7 @@ class Job(Drmaa2Object):
         jstate = drmaa2_lib.drmaa2_j_get_state(self._struct, sub_state)
         if jstate == int(JobState.UNSET_JSTATE):
             ExceptionMapper.check_last_error_code()
-        return (JobState(jstate),sub_state.contents.value)
+        return (JobState(jstate), sub_state.contents.value)
 
     def get_info(self):
         """ 
@@ -369,4 +370,3 @@ class Job(Drmaa2Object):
         for j in py_job_list:
             ExceptionMapper.check_status_code(drmaa2_lib.drmaa2_list_add(ctypes_job_list, j._struct))
         return ctypes_job_list
-

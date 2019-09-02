@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import time
 from drmaa2 import JobSession
@@ -25,19 +25,18 @@ from drmaa2 import Time
 if __name__ == '__main__':
     js = JobSession('js-01')
     print('Created job session: %s' % js.name)
-    j = js.run_job({'remote_command' : '/bin/sleep', 'args' : ['100']})
+    j = js.run_job({'remote_command': '/bin/sleep', 'args': ['100']})
     print('Submitted job: %s, waiting on start' % j)
     t1 = time.time()
     j.wait_started(10)
     t2 = time.time()
-    print('Wait on job start is over after %s seconds' % (t2-t1))
+    print('Wait on job start is over after %s seconds' % (t2 - t1))
     ji = j.get_info()
     print('Retrieved job info: %s' % ji)
     print('Waiting on job %s termination' % j.id)
     t1 = time.time()
     j.wait_terminated(Time.INFINITE_TIME.value)
     t2 = time.time()
-    print('Job terminated, wait is over after %s seconds' % (t2-t1))
+    print('Job terminated, wait is over after %s seconds' % (t2 - t1))
     ji = j.get_info()
     print('Retrieved job info after termination: %s' % ji)
-

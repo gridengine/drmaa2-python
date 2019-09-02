@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,18 +15,17 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import time
 from drmaa2 import JobSession
 
 if __name__ == '__main__':
     js = JobSession('js-01')
-    j = js.run_job({'remote_command' : '/bin/sleep', 'args' : ['100']})
+    j = js.run_job({'remote_command': '/bin/sleep', 'args': ['100']})
     ji = j.get_info()
     print('Submitted job info: %s' % ji)
     time.sleep(10)
     j.terminate()
     ji = j.get_info()
     print('Terminated job info: %s' % ji)
-

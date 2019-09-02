@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from ctypes import POINTER
 from ctypes import pointer
@@ -23,8 +23,9 @@ from ctypes import pointer
 from .drmaa2_constants import *
 from .drmaa2_ctypes import drmaa2_jinfo
 from .drmaa2_object import Drmaa2Object
-#from .drmaa2_slot_info_list_descriptor import Drmaa2SlotInfoListDescriptor
+# from .drmaa2_slot_info_list_descriptor import Drmaa2SlotInfoListDescriptor
 from .drmaa2_exceptions import InvalidArgument
+
 
 class JobInfo(Drmaa2Object):
     """ High-level DRMAA2 job info class. """
@@ -44,7 +45,7 @@ class JobInfo(Drmaa2Object):
     job_sub_state = Drmaa2Object.StringDescriptor('jobSubState')
     """ Job sub state (str). """
     allocated_machines = Drmaa2Object.StringListDescriptor('allocatedMachines')
-    #allocated_machines = Drmaa2SlotInfoListDescriptor('allocatedMachines')
+    # allocated_machines = Drmaa2SlotInfoListDescriptor('allocatedMachines')
     """ List of machines allocated to the job ([str]). """
     submission_machine = Drmaa2Object.StringDescriptor('submissionMachine')
     """ Job submission machine (str). """
@@ -88,7 +89,7 @@ class JobInfo(Drmaa2Object):
         if isinstance(job_info, dict):
             self._struct = POINTER(drmaa2_jinfo)()
             self._struct.contents = drmaa2_jinfo()
-            #self._struct = self.get_drmaa2_library().drmaa2_jinfo_create()
+            # self._struct = self.get_drmaa2_library().drmaa2_jinfo_create()
             self.__init_defaults()
             self.init_impl_spec_key_values()
             self.from_dict(job_info)
@@ -98,9 +99,9 @@ class JobInfo(Drmaa2Object):
             raise InvalidArgument('Invalid argument: %s' % str(job_info))
 
     def __del__(self):
-        #self.get_drmaa2_library().drmaa2_jinfo_free(pointer(self._struct))
+        # self.get_drmaa2_library().drmaa2_jinfo_free(pointer(self._struct))
         pass
-   
+
     def __init_defaults(self):
         self.job_id = None
         self.wallclock_time = UNSET_TIME
@@ -126,4 +127,3 @@ class JobInfo(Drmaa2Object):
         if cls.implementation_specific_keys is None:
             cls.implementation_specific_keys = cls.to_py_string_list(cls.get_drmaa2_library().drmaa2_jinfo_impl_spec())
         return cls.implementation_specific_keys
- 

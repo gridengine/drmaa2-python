@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from ctypes import pointer
 from ctypes import POINTER
@@ -36,6 +36,7 @@ from .drmaa2_object import Drmaa2Object
 from .log_manager import LogManager
 from .exception_mapper import ExceptionMapper
 from .drmaa2_job_list_descriptor import Drmaa2JobListDescriptor
+
 
 class JobArray(Drmaa2Object):
     """ High-level DRMAA2 job array class. """
@@ -72,7 +73,7 @@ class JobArray(Drmaa2Object):
             ExceptionMapper.check_status_code(drmaa2_lib.drmaa2_jarray_suspend_as(auth._struct, self._struct))
         else:
             ExceptionMapper.check_status_code(drmaa2_lib.drmaa2_jarray_suspend(self._struct))
-    
+
     def resume(self, auth=None):
         """ 
         Resume the job array.
@@ -94,7 +95,7 @@ class JobArray(Drmaa2Object):
             ExceptionMapper.check_status_code(drmaa2_lib.drmaa2_jarray_resume_as(auth._struct, self._struct))
         else:
             ExceptionMapper.check_status_code(drmaa2_lib.drmaa2_jarray_resume(self._struct))
-    
+
     def hold(self, auth=None):
         """ 
         Hold the job array.
@@ -214,4 +215,3 @@ class JobArray(Drmaa2Object):
     def __del__(self):
         if self._struct:
             self.get_drmaa2_library().drmaa2_jarray_free(pointer(self._struct))
-

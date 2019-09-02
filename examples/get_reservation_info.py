@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import random
 from drmaa2 import ReservationSession
@@ -24,7 +24,7 @@ if __name__ == '__main__':
     rs = ReservationSession('rs-01')
     print('Created reservation session: %s' % rs.name)
     r_name = 'res-%s' % int(random.uniform(0, 1000))
-    d = {'reservation_name' : r_name, 'duration' : 100}
+    d = {'reservation_name': r_name, 'duration': 100}
     print('Requesting reservation using dictionary: %s' % d)
     r = rs.request_reservation(d)
     print('Created reservation: %s' % r)
@@ -32,4 +32,3 @@ if __name__ == '__main__':
     print('Retrieving info for reservation id: %s' % r_id)
     ri = r.get_info()
     print('Retrieved reservation info: %s' % ri)
-

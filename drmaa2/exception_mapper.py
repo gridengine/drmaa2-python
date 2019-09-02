@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 """
 Exception mapper class.
@@ -31,7 +31,7 @@ from .drmaa2_exceptions import SessionManagementError
 from .drmaa2_exceptions import TimeoutError
 from .drmaa2_exceptions import InternalError
 from .drmaa2_exceptions import InvalidArgument
-from .drmaa2_exceptions import InvalidSession 
+from .drmaa2_exceptions import InvalidSession
 from .drmaa2_exceptions import InvalidState
 from .drmaa2_exceptions import ResourceNotAvailable
 from .drmaa2_exceptions import UnsupportedAttribute
@@ -40,25 +40,25 @@ from .drmaa2_exceptions import ImplementationSpecificError
 from .drmaa2_exceptions import AuthorizationError
 from .library_manager import LibraryManager
 
-class ExceptionMapper(object):
 
+class ExceptionMapper(object):
     EXCEPTION_MAP = {
-        StatusCode.UNSET_ERROR : Drmaa2Exception,
-        StatusCode.SUCCESS : None,
-        StatusCode.DENIED_BY_DRMS : DeniedByDrms,
-        StatusCode.DRM_COMMUNICATION : DrmCommunicationError,
-        StatusCode.TRY_LATER : TryLaterError,
-        StatusCode.SESSION_MANAGEMENT : SessionManagementError,
-        StatusCode.TIMEOUT : TimeoutError,
-        StatusCode.INTERNAL : InternalError,
-        StatusCode.INVALID_ARGUMENT : InvalidArgument,
-        StatusCode.INVALID_SESSION : InvalidSession,
-        StatusCode.INVALID_STATE : InvalidState,
-        StatusCode.OUT_OF_RESOURCE : ResourceNotAvailable,
-        StatusCode.UNSUPPORTED_ATTRIBUTE : UnsupportedAttribute,
-        StatusCode.UNSUPPORTED_OPERATION : UnsupportedOperation,
-        StatusCode.IMPLEMENTATION_SPECIFIC : ImplementationSpecificError,
-        StatusCode.AUTHORIZATION : AuthorizationError,
+        StatusCode.UNSET_ERROR: Drmaa2Exception,
+        StatusCode.SUCCESS: None,
+        StatusCode.DENIED_BY_DRMS: DeniedByDrms,
+        StatusCode.DRM_COMMUNICATION: DrmCommunicationError,
+        StatusCode.TRY_LATER: TryLaterError,
+        StatusCode.SESSION_MANAGEMENT: SessionManagementError,
+        StatusCode.TIMEOUT: TimeoutError,
+        StatusCode.INTERNAL: InternalError,
+        StatusCode.INVALID_ARGUMENT: InvalidArgument,
+        StatusCode.INVALID_SESSION: InvalidSession,
+        StatusCode.INVALID_STATE: InvalidState,
+        StatusCode.OUT_OF_RESOURCE: ResourceNotAvailable,
+        StatusCode.UNSUPPORTED_ATTRIBUTE: UnsupportedAttribute,
+        StatusCode.UNSUPPORTED_OPERATION: UnsupportedOperation,
+        StatusCode.IMPLEMENTATION_SPECIFIC: ImplementationSpecificError,
+        StatusCode.AUTHORIZATION: AuthorizationError,
     }
 
     @classmethod
@@ -109,9 +109,9 @@ class ExceptionMapper(object):
             error = error_class(error=cls.get_last_error_message())
             raise error
 
+
 #######################################################################
 # Test.
 if __name__ == '__main__':
     ExceptionMapper.check_last_error_code()
     ExceptionMapper.check_status_code(5)
-

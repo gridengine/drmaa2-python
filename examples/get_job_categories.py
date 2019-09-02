@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from drmaa2 import JobSession
 
@@ -24,4 +24,3 @@ if __name__ == '__main__':
     print('Created job session: %s' % js.name)
     job_categories = js.get_job_categories()
     print('Retrieved job categories: %s' % job_categories)
-

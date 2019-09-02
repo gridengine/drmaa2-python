@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from ctypes import POINTER
 from ctypes import pointer
@@ -26,6 +26,7 @@ from .drmaa2_ctypes import drmaa2_rtemplate
 from .drmaa2_ctypes import drmaa2_string
 from .drmaa2_object import Drmaa2Object
 from .drmaa2_exceptions import InvalidArgument
+
 
 class ReservationTemplate(Drmaa2Object):
     """ High-level DRMAA2 reservation template class. """
@@ -98,6 +99,6 @@ class ReservationTemplate(Drmaa2Object):
         ['uge_rt_native']
         """
         if cls.implementation_specific_keys is None:
-            cls.implementation_specific_keys = cls.to_py_string_list(cls.get_drmaa2_library().drmaa2_rtemplate_impl_spec())
-        return cls.implementation_specific_keys 
-
+            cls.implementation_specific_keys = cls.to_py_string_list(
+                cls.get_drmaa2_library().drmaa2_rtemplate_impl_spec())
+        return cls.implementation_specific_keys

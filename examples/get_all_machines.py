@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import socket
 from drmaa2 import MonitoringSession
@@ -27,4 +27,3 @@ if __name__ == '__main__':
     print('Retrieving machine information for host %s' % hostname)
     mi_list = ms.get_all_machines([hostname])
     print('Got all machines: %s' % mi_list)
-

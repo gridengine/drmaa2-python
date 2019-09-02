@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,11 +15,12 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from nose import SkipTest
 from drmaa2 import Notification
 from drmaa2 import UnsupportedOperation
+
 
 def test_register_event_callback():
     def callback(notification):
@@ -30,5 +31,3 @@ def test_register_event_callback():
         print('\nRegistered callback for event notification')
     except UnsupportedOperation:
         raise SkipTest('Not yet implemented optional feature.')
-
-

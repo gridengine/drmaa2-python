@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from ctypes import cast
 from ctypes import POINTER
@@ -24,6 +24,7 @@ from .byte_string import ByteString
 from .drmaa2_ctypes import drmaa2_slotinfo
 from .drmaa2_ctypes import drmaa2_string
 from .drmaa2_object import Drmaa2Object
+
 
 class SlotInfo(Drmaa2Object):
     """ High-level DRMAA2 slot info class. """
@@ -42,13 +43,13 @@ class SlotInfo(Drmaa2Object):
             self._struct = POINTER(drmaa2_slotinfo)()
             self._struct.contents = drmaa2_slotinfo()
             machine_name = ByteString(getattr(struct.contents, 'machineName').value).decode()
-            #self.machine_name = ByteString(getattr(struct.contents, 'machineName').value).decode()
+            # self.machine_name = ByteString(getattr(struct.contents, 'machineName').value).decode()
             self.machine_name = machine_name
             self.slots = getattr(struct.contents, 'slots')
 
     def __del__(self):
         pass
-   
+
     @classmethod
     def get_implementation_specific_keys(cls):
         """
@@ -57,7 +58,7 @@ class SlotInfo(Drmaa2Object):
         :returns: String list of implementation-specific keys.
         """
         if cls.implementation_specific_keys is None:
-            #cls.implementation_specific_keys = cls.to_py_string_list(cls.get_drmaa2_library().drmaa2_slotinfo_impl_spec())
+            # cls.implementation_specific_keys = cls.to_py_string_list(cls.get_drmaa2_library().drmaa2_slotinfo_impl_spec())
             cls.implementation_specific_keys = []
         return cls.implementation_specific_keys
 
@@ -85,4 +86,3 @@ class SlotInfo(Drmaa2Object):
         for si in py_job_list:
             ExceptionMapper.check_status_code(cls.drmaa2_lib.drmaa2_list_add(ctypes_job_list, si._struct))
         return ctypes_job_list
-

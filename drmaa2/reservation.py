@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from ctypes import cast
 from ctypes import POINTER
@@ -34,6 +34,7 @@ from .byte_string import ByteString
 from .drmaa2_object import Drmaa2Object
 from .log_manager import LogManager
 from .exception_mapper import ExceptionMapper
+
 
 class Reservation(Drmaa2Object):
     """ High-level DRMAA2 reservation class. """
@@ -88,7 +89,7 @@ class Reservation(Drmaa2Object):
         []
         """
         self.logger.debug('Retrieving template for reservation id {}'.format(self.id))
-        #ctypes_reservation_template = self.drmaa2_lib.drmaa2_r_get_reservation_template(self._struct)
+        # ctypes_reservation_template = self.drmaa2_lib.drmaa2_r_get_reservation_template(self._struct)
         ctypes_reservation_template = self.drmaa2_lib.drmaa2_r_get_rtemplate(self._struct)
         if not ctypes_reservation_template:
             ExceptionMapper.check_last_error_code()
@@ -136,8 +137,8 @@ class Reservation(Drmaa2Object):
     @classmethod
     def to_ctypes_reservation_list(cls, py_reservation_list):
         cls.logger.debug('Converting py reservation list of size {}'.format(len(py_reservation_list)))
-        ctypes_reservation_list = cls.drmaa2_lib.drmaa2_list_create(int(ListType.RESERVATIONLIST), drmaa2_list_entryfree())
+        ctypes_reservation_list = cls.drmaa2_lib.drmaa2_list_create(int(ListType.RESERVATIONLIST),
+                                                                    drmaa2_list_entryfree())
         for r in py_reservation_list:
             ExceptionMapper.check_status_code(cls.drmaa2_lib.drmaa2_list_add(ctypes_reservation_list, j._struct))
         return ctypes_reservation_list
-

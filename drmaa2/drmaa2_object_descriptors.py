@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import types
 import datetime
@@ -44,6 +44,7 @@ from .drmaa2_ctypes import drmaa2_dict_entryfree
 from .log_manager import LogManager
 from .library_manager import LibraryManager
 from .exception_mapper import ExceptionMapper
+
 
 class Drmaa2Descriptor(object):
     """ Base descriptor class for drmaa2_object fields. """
@@ -81,11 +82,12 @@ class Drmaa2Descriptor(object):
             return True
         return False
 
+
 class Drmaa2BoolDescriptor(Drmaa2Descriptor):
     """ A descriptor for drmaa2_bool fields. """
 
     def __init__(self, name):
-        Drmaa2Descriptor.__init__(self, name) 
+        Drmaa2Descriptor.__init__(self, name)
 
     def __get__(self, obj, type=None):
         value = False
@@ -99,7 +101,7 @@ class Drmaa2BoolDescriptor(Drmaa2Descriptor):
 
         if value is not None:
             if type(value) == PY_STRING_TYPE:
-                value = Bool[value].value 
+                value = Bool[value].value
             elif value:
                 value = int(Bool.TRUE)
             else:
@@ -109,11 +111,12 @@ class Drmaa2BoolDescriptor(Drmaa2Descriptor):
         setattr(obj._struct.contents, self.name, value)
         obj._dict[self.name] = value
 
+
 class Drmaa2EnumDescriptor(Drmaa2Descriptor):
     """ A descriptor for drmaa2_enum fields. """
 
     def __init__(self, name, cls):
-        Drmaa2Descriptor.__init__(self, name) 
+        Drmaa2Descriptor.__init__(self, name)
         self.cls = cls
 
     def __get__(self, obj, type=None):
@@ -129,17 +132,18 @@ class Drmaa2EnumDescriptor(Drmaa2Descriptor):
             return
         if value is not None:
             if type(value) == PY_STRING_TYPE:
-                value = self.cls[value].value 
+                value = self.cls[value].value
         else:
             value = UNSET_ENUM
         setattr(obj._struct.contents, self.name, value)
         obj._dict[self.name] = value
 
+
 class Drmaa2TimeDescriptor(Drmaa2Descriptor):
     """ A descriptor for drmaa2_enum fields. """
 
     def __init__(self, name):
-        Drmaa2Descriptor.__init__(self, name) 
+        Drmaa2Descriptor.__init__(self, name)
 
     def __get__(self, obj, type=None):
         value = int(Time.UNSET_TIME)
@@ -153,7 +157,7 @@ class Drmaa2TimeDescriptor(Drmaa2Descriptor):
                 return t.name
         except ValueError:
             return datetime.datetime.utcfromtimestamp(value)
-            #return datetime.datetime.fromtimestamp(value)
+            # return datetime.datetime.fromtimestamp(value)
 
     def __set__(self, obj, value):
         if not self.can_write(obj):
@@ -162,7 +166,7 @@ class Drmaa2TimeDescriptor(Drmaa2Descriptor):
             if type(value) == PY_STRING_TYPE:
                 value = int(Time[value])
             elif isinstance(value, datetime.datetime):
-                value = int((value-POSIX_EPOCH).total_seconds())
+                value = int((value - POSIX_EPOCH).total_seconds())
             else:
                 value = int(value)
         else:
@@ -170,11 +174,12 @@ class Drmaa2TimeDescriptor(Drmaa2Descriptor):
         setattr(obj._struct.contents, self.name, value)
         obj._dict[self.name] = value
 
+
 class Drmaa2NumericTypeDescriptor(Drmaa2Descriptor):
     """ A descriptor for numeric type fields. """
 
     def __init__(self, name, unset_value=UNSET_NUM):
-        Drmaa2Descriptor.__init__(self, name) 
+        Drmaa2Descriptor.__init__(self, name)
         self.unset_value = unset_value
 
     def __get__(self, obj, type=None):
@@ -188,39 +193,44 @@ class Drmaa2NumericTypeDescriptor(Drmaa2Descriptor):
     def __set__(self, obj, value):
         if not self.can_write(obj):
             return
-        value = value if value is not None else self.unset_value 
+        value = value if value is not None else self.unset_value
         setattr(obj._struct.contents, self.name, value)
         obj._dict[self.name] = value
+
 
 class Drmaa2IntDescriptor(Drmaa2NumericTypeDescriptor):
     """ A descriptor for int fields. """
 
     def __init__(self, name, unset_value=UNSET_NUM):
-        Drmaa2NumericTypeDescriptor.__init__(self, name, unset_value) 
+        Drmaa2NumericTypeDescriptor.__init__(self, name, unset_value)
+
 
 class Drmaa2LongDescriptor(Drmaa2IntDescriptor):
     """ A descriptor for long fields. """
 
     def __init__(self, name, unset_value=UNSET_NUM):
-        Drmaa2IntDescriptor.__init__(self, name, unset_value) 
+        Drmaa2IntDescriptor.__init__(self, name, unset_value)
+
 
 class Drmaa2LongLongDescriptor(Drmaa2IntDescriptor):
     """ A descriptor for long long fields. """
 
     def __init__(self, name, unset_value=UNSET_NUM):
-        Drmaa2IntDescriptor.__init__(self, name, unset_value) 
+        Drmaa2IntDescriptor.__init__(self, name, unset_value)
+
 
 class Drmaa2FloatDescriptor(Drmaa2NumericTypeDescriptor):
     """ A descriptor for float fields. """
 
     def __init__(self, name, unset_value=UNSET_NUM):
-        Drmaa2NumericTypeDescriptor.__init__(self, name, unset_value) 
+        Drmaa2NumericTypeDescriptor.__init__(self, name, unset_value)
+
 
 class Drmaa2CharBufferDescriptor(Drmaa2Descriptor):
     """ A descriptor for char[] fields. """
 
     def __init__(self, name):
-        Drmaa2Descriptor.__init__(self, name) 
+        Drmaa2Descriptor.__init__(self, name)
 
     def __get__(self, obj, type=None):
         value = None
@@ -239,11 +249,12 @@ class Drmaa2CharBufferDescriptor(Drmaa2Descriptor):
         setattr(obj._struct.contents, self.name, value)
         obj._dict[self.name] = value
 
+
 class Drmaa2StringDescriptor(Drmaa2Descriptor):
     """ A descriptor for drmaa2_string fields. """
 
     def __init__(self, name):
-        Drmaa2Descriptor.__init__(self, name) 
+        Drmaa2Descriptor.__init__(self, name)
 
     def __get__(self, obj, type=None):
         value = None
@@ -263,13 +274,14 @@ class Drmaa2StringDescriptor(Drmaa2Descriptor):
         setattr(obj._struct.contents, self.name, value)
         obj._dict[self.name] = value
 
+
 class Drmaa2StringListDescriptor(Drmaa2Descriptor):
     """ A descriptor for drmaa2_string_list fields. """
 
     logger = LogManager.get_instance().get_logger('Drmaa2StringListDescriptor')
 
     def __init__(self, name):
-        Drmaa2Descriptor.__init__(self, name) 
+        Drmaa2Descriptor.__init__(self, name)
 
     def __get__(self, obj, type=None):
         if not self.can_read(obj):
@@ -304,10 +316,11 @@ class Drmaa2StringListDescriptor(Drmaa2Descriptor):
                 count = self.get_drmaa2_library().drmaa2_list_size(ctypes_list)
         else:
             self.logger.debug('Creating string list {}'.format(self.name))
-            ctypes_list = self.get_drmaa2_library().drmaa2_list_create(int(ListType.STRINGLIST), drmaa2_list_entryfree())
+            ctypes_list = self.get_drmaa2_library().drmaa2_list_create(int(ListType.STRINGLIST),
+                                                                       drmaa2_list_entryfree())
             setattr(obj._struct.contents, self.name, ctypes_list)
 
-        value_list = [ByteString(v).encode() for v in value_list] 
+        value_list = [ByteString(v).encode() for v in value_list]
         for i in range(len(value_list)):
             v = value_list[i]
             self.logger.debug('Adding {}[{}] = {}'.format(self.name, i, v))
@@ -315,13 +328,14 @@ class Drmaa2StringListDescriptor(Drmaa2Descriptor):
         # this assures proper memory management in python 3
         obj._dict[self.name] = value_list
 
+
 class Drmaa2DictDescriptor(Drmaa2Descriptor):
     """ A descriptor for drmaa2_dict fields. """
 
     logger = LogManager.get_instance().get_logger('Drmaa2DictDescriptor')
 
     def __init__(self, name):
-        Drmaa2Descriptor.__init__(self, name) 
+        Drmaa2Descriptor.__init__(self, name)
 
     def __get__(self, obj, type=None):
         if not self.can_read(obj):
@@ -364,12 +378,13 @@ class Drmaa2DictDescriptor(Drmaa2Descriptor):
             ctypes_dict = self.get_drmaa2_library().drmaa2_dict_create(drmaa2_dict_entryfree())
             setattr(obj._struct.contents, self.name, ctypes_dict)
 
-        value_dict = {ByteString(k).encode():ByteString(v).encode() for (k, v) in value_dict.items()}
-        for (k,v) in value_dict.items():
+        value_dict = {ByteString(k).encode(): ByteString(v).encode() for (k, v) in value_dict.items()}
+        for (k, v) in value_dict.items():
             self.logger.debug('{}[{}] = {}'.format(self.name, k, v))
             ExceptionMapper.check_status_code(self.get_drmaa2_library().drmaa2_dict_set(ctypes_dict, k, v))
         # this assures proper memory management in python 3
-        obj._dict[self.name] = value_dict 
+        obj._dict[self.name] = value_dict
+
 
 class Drmaa2ImplSpecDescriptor(Drmaa2Descriptor):
     """ A descriptor for implementation specific fields. """
@@ -377,7 +392,7 @@ class Drmaa2ImplSpecDescriptor(Drmaa2Descriptor):
     logger = LogManager.get_instance().get_logger('Drmaa2ImplSpecDescriptor')
 
     def __init__(self, name='implementationSpecific'):
-        Drmaa2Descriptor.__init__(self, name) 
+        Drmaa2Descriptor.__init__(self, name)
 
     def __get__(self, obj, type=None):
         if not self.can_read(obj):
@@ -392,7 +407,7 @@ class Drmaa2ImplSpecDescriptor(Drmaa2Descriptor):
             if value is not None:
                 implSpecDict[key] = value
         return implSpecDict
-             
+
     def __set__(self, obj, implSpecDict):
         if not self.can_write(obj):
             return
@@ -401,8 +416,8 @@ class Drmaa2ImplSpecDescriptor(Drmaa2Descriptor):
             if value is not None:
                 obj.set_impl_spec_key_value(key, value)
 
+
 #######################################################################
 # Test.
 if __name__ == '__main__':
     o = Drmaa2BoolDescriptor('boolField')
-    

@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from uuid import uuid4
 from ctypes import pointer
@@ -36,6 +36,7 @@ from .job_info import JobInfo
 from .job import Job
 from .log_manager import LogManager
 from .exception_mapper import ExceptionMapper
+
 
 class MonitoringSession(Drmaa2Object):
     """ High-level DRMAA2 monitoring session class. """
@@ -134,7 +135,7 @@ class MonitoringSession(Drmaa2Object):
 
         py_machine_info_list = []
         if ctypes_machine_info_list:
-            py_machine_info_list = MachineInfo.to_py_machine_info_list(ctypes_machine_info_list) 
+            py_machine_info_list = MachineInfo.to_py_machine_info_list(ctypes_machine_info_list)
             drmaa2_lib.drmaa2_list_free(pointer(c_void_p(ctypes_machine_info_list)))
         drmaa2_lib.drmaa2_list_free(pointer(c_void_p(ctypes_filter)))
         return py_machine_info_list
@@ -161,7 +162,7 @@ class MonitoringSession(Drmaa2Object):
 
         py_queue_info_list = []
         if ctypes_queue_info_list:
-            py_queue_info_list = QueueInfo.to_py_queue_info_list(ctypes_queue_info_list) 
+            py_queue_info_list = QueueInfo.to_py_queue_info_list(ctypes_queue_info_list)
             drmaa2_lib.drmaa2_list_free(pointer(c_void_p(ctypes_queue_info_list)))
         drmaa2_lib.drmaa2_list_free(pointer(c_void_p(ctypes_filter)))
         return py_queue_info_list
@@ -192,7 +193,7 @@ class MonitoringSession(Drmaa2Object):
 
         py_reservation_list = []
         if ctypes_reservation_list:
-            py_reservation_list = Reservation.to_py_reservation_list(ctypes_reservation_list) 
+            py_reservation_list = Reservation.to_py_reservation_list(ctypes_reservation_list)
             drmaa2_lib.drmaa2_list_free(pointer(c_void_p(ctypes_reservation_list)))
         return py_reservation_list
 
@@ -220,8 +221,6 @@ class MonitoringSession(Drmaa2Object):
 
         py_job_list = []
         if ctypes_job_list:
-            py_job_list = Job.to_py_job_list(ctypes_job_list) 
+            py_job_list = Job.to_py_job_list(ctypes_job_list)
             drmaa2_lib.drmaa2_list_free(pointer(c_void_p(ctypes_job_list)))
         return py_job_list
-
-

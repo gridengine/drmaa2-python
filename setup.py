@@ -1,4 +1,4 @@
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 from __future__ import with_statement, print_function
 import sys
 
@@ -26,9 +26,11 @@ except ImportError:
 
 try:
     from setuptools import setup
+
     extra = dict(include_package_data=True)
 except ImportError:
     from distutils.core import setup
+
     extra = {}
 
 import os
@@ -40,30 +42,29 @@ if sys.version_info <= (2, 7):
     print(error, file=sys.stderr)
     sys.exit(1)
 
-def readme():
-    with open("README.md") as f:
-        return f.read()
+with open("README.md") as f:
+    long_description = f.read()
 
-setup(name = 'uge-drmaa2',
-      version = __version__,
-      description = 'UGE DRMAA2 Python API',
-      long_description = readme(),
-      author = 'Univa',
-      author_email = 'info@univa.com',
-      test_suite = 'test',
-      url = 'https://www.univa.com',
-      packages = [ 'drmaa2' ],
-      install_requires = [ ],
-      package_data = {
+setup(name='uge-drmaa2',
+      version=__version__,
+      description='UGE DRMAA2 Python API',
+      long_description=long_description,
+      long_description_content_type='text/markdown',
+      author='Univa',
+      author_email='info@univa.com',
+      test_suite='test',
+      url='https://www.univa.com',
+      packages=['drmaa2'],
+      install_requires=[],
+      package_data={
       },
-      license = 'Apache 2.0',
-      platforms = 'Posix; MacOS X',
-      classifiers = [
-                     'Intended Audience :: Developers',
-                     'Operating System :: OS Independent',
-                     'Programming Language :: Python :: 2.7',
-                     'Programming Language :: Python :: 3.x',
+      license='Apache 2.0',
+      platforms='Posix; MacOS X',
+      classifiers=[
+          'Intended Audience :: Developers',
+          'Operating System :: OS Independent',
+          'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3',
       ],
       **extra
-)
-
+      )

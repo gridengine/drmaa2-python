@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from drmaa2 import MonitoringSession
 
@@ -26,4 +26,3 @@ if __name__ == '__main__':
     print('Retrieving queue information for %s' % q_name)
     qi_list = ms.get_all_queues([q_name])
     print('Got all queues: %s' % qi_list)
-

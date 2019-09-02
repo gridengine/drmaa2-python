@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 
 import copy
@@ -35,7 +35,7 @@ from .log_manager import LogManager
 from .library_manager import LibraryManager
 from .exception_mapper import ExceptionMapper
 
-from .drmaa2_object_descriptors import Drmaa2BoolDescriptor 
+from .drmaa2_object_descriptors import Drmaa2BoolDescriptor
 from .drmaa2_object_descriptors import Drmaa2EnumDescriptor
 from .drmaa2_object_descriptors import Drmaa2TimeDescriptor
 from .drmaa2_object_descriptors import Drmaa2IntDescriptor
@@ -48,21 +48,22 @@ from .drmaa2_object_descriptors import Drmaa2StringListDescriptor
 from .drmaa2_object_descriptors import Drmaa2DictDescriptor
 from .drmaa2_object_descriptors import Drmaa2ImplSpecDescriptor
 
+
 class Drmaa2Object(object):
     """ Base class for all high-level objects. """
 
-    BoolDescriptor = Drmaa2BoolDescriptor 
-    EnumDescriptor = Drmaa2EnumDescriptor 
-    TimeDescriptor = Drmaa2TimeDescriptor 
-    CharBufferDescriptor = Drmaa2CharBufferDescriptor 
-    StringDescriptor = Drmaa2StringDescriptor 
-    StringListDescriptor  = Drmaa2StringListDescriptor 
-    DictDescriptor = Drmaa2DictDescriptor 
-    IntDescriptor = Drmaa2IntDescriptor 
-    LongDescriptor = Drmaa2LongDescriptor 
-    LongLongDescriptor = Drmaa2LongLongDescriptor 
-    FloatDescriptor = Drmaa2FloatDescriptor 
-    ImplSpecDescriptor = Drmaa2ImplSpecDescriptor 
+    BoolDescriptor = Drmaa2BoolDescriptor
+    EnumDescriptor = Drmaa2EnumDescriptor
+    TimeDescriptor = Drmaa2TimeDescriptor
+    CharBufferDescriptor = Drmaa2CharBufferDescriptor
+    StringDescriptor = Drmaa2StringDescriptor
+    StringListDescriptor = Drmaa2StringListDescriptor
+    DictDescriptor = Drmaa2DictDescriptor
+    IntDescriptor = Drmaa2IntDescriptor
+    LongDescriptor = Drmaa2LongDescriptor
+    LongLongDescriptor = Drmaa2LongLongDescriptor
+    FloatDescriptor = Drmaa2FloatDescriptor
+    ImplSpecDescriptor = Drmaa2ImplSpecDescriptor
 
     logger = LogManager.get_instance().get_logger('Drmaa2Object')
     drmaa2_lib = None
@@ -91,18 +92,19 @@ class Drmaa2Object(object):
     @classmethod
     def scrub_dict(cls, d):
         """ Remove empty keys from the dictionary. """
-        return {k:v for (k,v) in d.items() if v is not None}
+        return {k: v for (k, v) in d.items() if v is not None}
 
     def get_impl_spec_key_value(self, key):
         """ Get value for an implementation specific key. """
         ctypes_string = self.drmaa2_lib.drmaa2_get_instance_value(cast(self._struct, c_void_p), key.encode())
-        #ExceptionMapper.check_last_error_code()
+        # ExceptionMapper.check_last_error_code()
         return self.to_py_string(ctypes_string)
 
     def set_impl_spec_key_value(self, key, value):
         """ Get value for an implementation specific key. """
-        ExceptionMapper.check_status_code(self.drmaa2_lib.drmaa2_set_instance_value(cast(self._struct, c_void_p), key.encode(), value.encode()))
-    
+        ExceptionMapper.check_status_code(
+            self.drmaa2_lib.drmaa2_set_instance_value(cast(self._struct, c_void_p), key.encode(), value.encode()))
+
     def init_impl_spec_key_values(self):
         """ Initialize values for implementation specific keys. """
         for key in self.get_implementation_specific_keys():
@@ -145,10 +147,10 @@ class Drmaa2Object(object):
 
         if not self._struct:
             self._dict.join(d)
-            return 
+            return
 
-        for (key,value) in d.items():
-            self.logger.debug('Setting {}={}'.format(key,str(value)))
+        for (key, value) in d.items():
+            self.logger.debug('Setting {}={}'.format(key, str(value)))
             setattr(self, key, value)
 
     def to_dict(self):
@@ -163,7 +165,7 @@ class Drmaa2Object(object):
         """
         d = dict()
         if not self._struct:
-            for (k,v) in self._dict.items():
+            for (k, v) in self._dict.items():
                 if v is not None:
                     d[k] = v
                     if type(v) == PY_STRING_TYPE:
@@ -188,19 +190,19 @@ class Drmaa2Object(object):
             cls.attribute_names = []
             for attr_name in sorted(attributes):
                 # Convert aXY to a_XY
-                attr_name2 = re.sub('([a-z])([A-Z]{2,})', r'\1_\2',attr_name)
+                attr_name2 = re.sub('([a-z])([A-Z]{2,})', r'\1_\2', attr_name)
                 # Convert Xa to _Xa
-                attr_name2 = re.sub('([A-Z][a-z]{1,})', r'_\1',attr_name2).lower()
+                attr_name2 = re.sub('([A-Z][a-z]{1,})', r'_\1', attr_name2).lower()
                 cls.attribute_names.append(attr_name2)
         return cls.attribute_names
-            
+
     def __str__(self):
         """ Conversion to string. """
         return str(self.to_dict())
 
     def __repr__(self):
         """ Object representation. """
-        return '%s(%s)' % (self.__class__.__name__,self.__str__())
+        return '%s(%s)' % (self.__class__.__name__, self.__str__())
 
     @classmethod
     def to_py_dict(cls, ctypes_dict):
@@ -260,8 +262,8 @@ class Drmaa2Object(object):
     def get_implementation_specific_keys(cls):
         return cls.implementation_specific_keys
 
+
 #######################################################################
 # Test.
 if __name__ == '__main__':
     o = Drmaa2Object()
-    

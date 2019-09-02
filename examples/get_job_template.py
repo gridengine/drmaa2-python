@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from drmaa2 import JobSession
 from drmaa2 import JobTemplate
@@ -23,11 +23,10 @@ from drmaa2 import JobTemplate
 if __name__ == '__main__':
     js = JobSession('js-01')
     print('Created job session: %s' % js.name)
-    jt = JobTemplate({'remote_command' : '/bin/sleep', 'args' : ['100']})
+    jt = JobTemplate({'remote_command': '/bin/sleep', 'args': ['100']})
     print('Running job using template: %s' % jt)
     j = js.run_job(jt)
     print('Submitted job: %s' % j)
     jt2 = j.get_template()
     print('Retrieved job template: %s' % jt2)
     print('Retrieved template equals the original? %s' % (jt == jt2))
-

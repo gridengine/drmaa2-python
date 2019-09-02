@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import os
 import glob
@@ -74,6 +74,7 @@ from .byte_string import ByteString
 from .log_manager import LogManager
 from .singleton import Singleton
 from .drmaa2_exceptions import Drmaa2Exception
+
 
 class LibraryManager(Singleton):
     """ 
@@ -161,12 +162,12 @@ class LibraryManager(Singleton):
         drmaa2_lib = None
         try:
             SGE_ROOT = os.environ['SGE_ROOT']
-            SGE_ARCH = os.popen(SGE_ROOT+'/util/arch').read().rstrip()
+            SGE_ARCH = os.popen(SGE_ROOT + '/util/arch').read().rstrip()
             lib_dir = SGE_ROOT + '/lib/' + SGE_ARCH
             cls.logger.debug('Looking for DRMAA2 library under %s' % lib_dir)
-            lib_paths = glob.glob(lib_dir+'/libdrmaa2.so')
+            lib_paths = glob.glob(lib_dir + '/libdrmaa2.so')
             if not lib_paths:
-                lib_paths = glob.glob(lib_dir+'/libdrmaa2.dylib')
+                lib_paths = glob.glob(lib_dir + '/libdrmaa2.dylib')
             if len(lib_paths):
                 lib_path = lib_paths[0]
             else:
@@ -179,7 +180,7 @@ class LibraryManager(Singleton):
             drmaa2_lib = ctypes.cdll.LoadLibrary(str(lib_path))
         except OSError:
             raise Drmaa2Exception('Could not load DRMAA2 library.')
-    
+
         cls.logger.debug("Initializing DRMAA2 library")
 
         drmaa2_lib.drmaa2_string_free.restype = None
@@ -284,7 +285,7 @@ class LibraryManager(Singleton):
         drmaa2_lib.drmaa2_describe_attribute.restype = drmaa2_string
         drmaa2_lib.drmaa2_describe_attribute.argtypes = [c_void_p, c_char_p]
         drmaa2_lib.drmaa2_set_instance_value.restype = drmaa2_error
-        drmaa2_lib.drmaa2_set_instance_value.argtypes = [c_void_p,c_char_p, c_char_p]
+        drmaa2_lib.drmaa2_set_instance_value.argtypes = [c_void_p, c_char_p, c_char_p]
 
         drmaa2_lib.drmaa2_jsession_free.restype = None
         drmaa2_lib.drmaa2_jsession_free.argtypes = [POINTER(POINTER(drmaa2_jsession))]
@@ -292,7 +293,7 @@ class LibraryManager(Singleton):
         drmaa2_lib.drmaa2_rsession_free.argtypes = [POINTER(POINTER(drmaa2_rsession))]
         drmaa2_lib.drmaa2_msession_free.restype = None
         drmaa2_lib.drmaa2_msession_free.argtypes = [POINTER(POINTER(drmaa2_msession))]
-        
+
         drmaa2_lib.drmaa2_j_free.restype = None
         drmaa2_lib.drmaa2_j_free.argtypes = [POINTER(POINTER(drmaa2_j))]
         drmaa2_lib.drmaa2_jarray_free.restype = None
@@ -309,8 +310,9 @@ class LibraryManager(Singleton):
         drmaa2_lib.drmaa2_rsession_request_reservation.restype = POINTER(drmaa2_r)
         drmaa2_lib.drmaa2_rsession_request_reservation.argtypes = [POINTER(drmaa2_rsession), POINTER(drmaa2_rtemplate)]
         drmaa2_lib.drmaa2_rsession_request_reservation_as.restype = POINTER(drmaa2_r)
-        drmaa2_lib.drmaa2_rsession_request_reservation_as.argtypes = [POINTER(drmaa2_sudo), POINTER(drmaa2_rsession), POINTER(drmaa2_rtemplate)]
-    
+        drmaa2_lib.drmaa2_rsession_request_reservation_as.argtypes = [POINTER(drmaa2_sudo), POINTER(drmaa2_rsession),
+                                                                      POINTER(drmaa2_rtemplate)]
+
         drmaa2_lib.drmaa2_rsession_get_reservations.restype = drmaa2_r_list
         drmaa2_lib.drmaa2_rsession_get_reservations.argtypes = [POINTER(drmaa2_rsession)]
 
@@ -318,8 +320,8 @@ class LibraryManager(Singleton):
         drmaa2_lib.drmaa2_r_get_id.argtypes = [drmaa2_r]
         drmaa2_lib.drmaa2_r_get_session_name.restype = drmaa2_string
         drmaa2_lib.drmaa2_r_get_session_name.argtypes = [drmaa2_r]
-        #drmaa2_lib.drmaa2_r_get_reservation_template.restype = POINTER(drmaa2_rtemplate)
-        #drmaa2_lib.drmaa2_r_get_reservation_template.argtypes = [POINTER(drmaa2_r)]
+        # drmaa2_lib.drmaa2_r_get_reservation_template.restype = POINTER(drmaa2_rtemplate)
+        # drmaa2_lib.drmaa2_r_get_reservation_template.argtypes = [POINTER(drmaa2_r)]
         drmaa2_lib.drmaa2_r_get_rtemplate.restype = POINTER(drmaa2_rtemplate)
         drmaa2_lib.drmaa2_r_get_rtemplate.argtypes = [POINTER(drmaa2_r)]
         drmaa2_lib.drmaa2_r_get_info.restype = POINTER(drmaa2_rinfo)
@@ -361,9 +363,11 @@ class LibraryManager(Singleton):
         drmaa2_lib.drmaa2_jsession_run_job.restype = POINTER(drmaa2_j)
         drmaa2_lib.drmaa2_jsession_run_job.argtypes = [POINTER(drmaa2_jsession), POINTER(drmaa2_jtemplate)]
         drmaa2_lib.drmaa2_jsession_run_job_as.restype = POINTER(drmaa2_j)
-        drmaa2_lib.drmaa2_jsession_run_job_as.argtypes = [POINTER(drmaa2_sudo), POINTER(drmaa2_jsession), POINTER(drmaa2_jtemplate)]
+        drmaa2_lib.drmaa2_jsession_run_job_as.argtypes = [POINTER(drmaa2_sudo), POINTER(drmaa2_jsession),
+                                                          POINTER(drmaa2_jtemplate)]
         drmaa2_lib.drmaa2_jsession_run_bulk_jobs.restype = POINTER(drmaa2_jarray)
-        drmaa2_lib.drmaa2_jsession_run_bulk_jobs.argtypes = [POINTER(drmaa2_jsession), POINTER(drmaa2_jtemplate),c_longlong, c_longlong, c_longlong, c_longlong]
+        drmaa2_lib.drmaa2_jsession_run_bulk_jobs.argtypes = [POINTER(drmaa2_jsession), POINTER(drmaa2_jtemplate),
+                                                             c_longlong, c_longlong, c_longlong, c_longlong]
         drmaa2_lib.drmaa2_jsession_wait_any_started.restype = POINTER(drmaa2_j)
         drmaa2_lib.drmaa2_jsession_wait_any_started.argtypes = [POINTER(drmaa2_jsession), drmaa2_j_list, drmaa2_time]
         drmaa2_lib.drmaa2_jsession_wait_any_terminated.restype = POINTER(drmaa2_j)
@@ -417,9 +421,9 @@ class LibraryManager(Singleton):
 
         drmaa2_lib.drmaa2_msession_get_all_reservations.restype = drmaa2_r_list
         drmaa2_lib.drmaa2_msession_get_all_reservations.argtypes = [POINTER(drmaa2_msession)]
-        
+
         drmaa2_lib.drmaa2_msession_get_all_jobs.restype = drmaa2_j_list
-        drmaa2_lib.drmaa2_msession_get_all_jobs.argtypes = [POINTER(drmaa2_msession),POINTER(drmaa2_jinfo)]
+        drmaa2_lib.drmaa2_msession_get_all_jobs.argtypes = [POINTER(drmaa2_msession), POINTER(drmaa2_jinfo)]
         drmaa2_lib.drmaa2_msession_get_all_queues.restype = drmaa2_queueinfo_list
         drmaa2_lib.drmaa2_msession_get_all_queues.argtypes = [POINTER(drmaa2_msession), drmaa2_string_list]
         drmaa2_lib.drmaa2_msession_get_all_machines.restype = drmaa2_machineinfo_list
@@ -472,12 +476,9 @@ class LibraryManager(Singleton):
         cls.logger.debug("Done initializing DRMAA2 library")
         return drmaa2_lib
 
+
 #######################################################################
 # Test.
 if __name__ == '__main__':
     lm = LibraryManager()
     print(lm.get_drmaa2_library())
-
-  
-
- 

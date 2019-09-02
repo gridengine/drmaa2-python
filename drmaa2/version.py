@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from ctypes import POINTER
 from ctypes import cast
@@ -26,6 +26,7 @@ from .byte_string import ByteString
 from .drmaa2_ctypes import drmaa2_version
 from .drmaa2_ctypes import drmaa2_dict
 from .drmaa2_object import Drmaa2Object
+
 
 class Version(Drmaa2Object):
     """ High-level DRMAA2 version class. """
@@ -64,7 +65,7 @@ class Version(Drmaa2Object):
 
     def __del__(self):
         pass
-   
+
     @classmethod
     def get_implementation_specific_attrs(cls):
         """
@@ -77,7 +78,8 @@ class Version(Drmaa2Object):
         """
         ctypes_version = cls.get_drmaa2_library().drmaa2_get_drmaa_version();
         if cls.implementation_specific_attrs is None:
-            cls.implementation_specific_attrs = cls.to_py_dict(cls.get_drmaa2_library().uge_vi_impl_spec_get(ctypes_version))
+            cls.implementation_specific_attrs = cls.to_py_dict(
+                cls.get_drmaa2_library().uge_vi_impl_spec_get(ctypes_version))
         return cls.implementation_specific_attrs
 
     @classmethod
@@ -91,7 +93,8 @@ class Version(Drmaa2Object):
         ['uge_version_json']
         """
         if cls.implementation_specific_keys is None:
-            cls.implementation_specific_keys = cls.to_py_string_list(cls.get_drmaa2_library().drmaa2_version_impl_spec())
+            cls.implementation_specific_keys = cls.to_py_string_list(
+                cls.get_drmaa2_library().drmaa2_version_impl_spec())
         return cls.implementation_specific_keys
 
     @classmethod
@@ -129,5 +132,3 @@ class Version(Drmaa2Object):
         py_version = Version(ctypes_version)
         cls.get_drmaa2_library().drmaa2_version_free(ctypes_version)
         return py_version
-
- 

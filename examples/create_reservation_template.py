@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,14 +15,15 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from drmaa2 import ReservationTemplate
 
 if __name__ == '__main__':
     import datetime
+
     print('Impl. spec. keys: %s' % ReservationTemplate.get_implementation_specific_keys())
-    rt = ReservationTemplate({'reservation_name' : 'res-01'})
+    rt = ReservationTemplate({'reservation_name': 'res-01'})
     print('Initial reservation template: %s' % rt)
     rt.users_acl = ['user1', 'user2', 'user3']
     rt.min_slots = 2
@@ -33,4 +34,3 @@ if __name__ == '__main__':
     print('Impl. spec. key uge_rt_native is set to: %s' % rt.get_impl_spec_key_value('uge_rt_native'))
     print('Impl. spec dictionary: %s' % rt.implementation_specific)
     print('Final reservation template: %s' % rt)
-

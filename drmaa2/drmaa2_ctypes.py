@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 """
 Definitions for DRMAA2 ctypes.
@@ -49,24 +49,23 @@ drmaa2_listtype = drmaa2_enum
 drmaa2_os = drmaa2_enum
 drmaa2_jstate = drmaa2_enum
 
-# drmaa2_string must be a subclass of c_char_p to allow us 
+
+# drmaa2_string must be a subclass of c_char_p to allow us
 # to free DRMAA2 strings.
 class drmaa2_string(c_char_p):
-
     python_version = platform.python_version_tuple()[0]
 
-#    def __init__(self, **kwargs):
-#        """
-#        Ctypes.Structure with integrated default values.
-#
-#        :param kwargs: values different to defaults
-#        :type kwargs: dict
-#        """
-#        values = type(self)._defaults_.copy()
-#        for (key, val) in kwargs.items():
-#            values[key] = val
-#        super().__init__(**values)
-
+    #    def __init__(self, **kwargs):
+    #        """
+    #        Ctypes.Structure with integrated default values.
+    #
+    #        :param kwargs: values different to defaults
+    #        :type kwargs: dict
+    #        """
+    #        values = type(self)._defaults_.copy()
+    #        for (key, val) in kwargs.items():
+    #            values[key] = val
+    #        super().__init__(**values)
 
     def __eq__(self, other):
         if isinstance(other, str):
@@ -86,6 +85,7 @@ class drmaa2_string(c_char_p):
     def decode(self):
         return self.value
 
+
 # List types
 drmaa2_list = c_void_p
 drmaa2_string_list = drmaa2_list
@@ -99,6 +99,7 @@ drmaa2_list_entryfree = CFUNCTYPE(None, POINTER(c_void_p))
 # Dict type
 drmaa2_dict = c_void_p
 drmaa2_dict_entryfree = CFUNCTYPE(None, POINTER(c_char_p), POINTER(c_char_p))
+
 
 # DRMAA2 structs.
 class drmaa2_struct(Structure):
@@ -118,11 +119,13 @@ class drmaa2_struct(Structure):
     def __ne__(self, other):
         return not self.__eq__(other)
 
+
 class drmaa2_sudo(drmaa2_struct):
-    _fields_ = [("username", c_char*DRMAA2_CHAR_BUFFER_SIZE),
-                ("groupname", c_char*DRMAA2_CHAR_BUFFER_SIZE),
+    _fields_ = [("username", c_char * DRMAA2_CHAR_BUFFER_SIZE),
+                ("groupname", c_char * DRMAA2_CHAR_BUFFER_SIZE),
                 ("uid", c_long),
                 ("gid", c_long)]
+
 
 class drmaa2_jinfo(drmaa2_struct):
     _fields_ = [("jobId", drmaa2_string),
@@ -144,10 +147,12 @@ class drmaa2_jinfo(drmaa2_struct):
                 ("finishTime", drmaa2_time),
                 ("implementationSpecific", c_void_p)]
 
+
 class drmaa2_slotinfo(drmaa2_struct):
     _fields_ = [("machineName", drmaa2_string),
                 ("slots", c_longlong),
                 ("implementationSpecific", c_void_p)]
+
 
 class drmaa2_rinfo(drmaa2_struct):
     _fields_ = [("reservationId", drmaa2_string),
@@ -158,6 +163,7 @@ class drmaa2_rinfo(drmaa2_struct):
                 ("reservedSlots", c_longlong),
                 ("reservedMachines", drmaa2_slotinfo_list),
                 ("implementationSpecific", c_void_p)]
+
 
 class drmaa2_jtemplate(drmaa2_struct):
     _fields_ = [("remoteCommand", drmaa2_string),
@@ -192,6 +198,7 @@ class drmaa2_jtemplate(drmaa2_struct):
                 ("accountingId", drmaa2_string),
                 ("implementationSpecific", c_void_p)]
 
+
 class drmaa2_rtemplate(drmaa2_struct):
     _fields_ = [("reservationName", drmaa2_string),
                 ("startTime", drmaa2_time),
@@ -207,6 +214,7 @@ class drmaa2_rtemplate(drmaa2_struct):
                 ("machineArch", drmaa2_cpu),
                 ("implementationSpecific", c_void_p)]
 
+
 class drmaa2_notification(drmaa2_struct):
     _fields_ = [("event", drmaa2_event),
                 ("jobId", drmaa2_string),
@@ -214,14 +222,17 @@ class drmaa2_notification(drmaa2_struct):
                 ("jobState", drmaa2_jstate),
                 ("implementationSpecific", c_void_p)]
 
+
 class drmaa2_queueinfo(drmaa2_struct):
     _fields_ = [("name", drmaa2_string),
                 ("implementationSpecific", c_void_p)]
+
 
 class drmaa2_version(drmaa2_struct):
     _fields_ = [("major", drmaa2_string),
                 ("minor", drmaa2_string),
                 ("implementationSpecific", c_void_p)]
+
 
 class drmaa2_machineinfo(drmaa2_struct):
     _fields_ = [("name", drmaa2_string),
@@ -237,8 +248,10 @@ class drmaa2_machineinfo(drmaa2_struct):
                 ("machineOS", drmaa2_os),
                 ("implementationSpecific", c_void_p)]
 
+
 # Callback function
 drmaa2_callback = CFUNCTYPE(None, POINTER(drmaa2_notification))
+
 
 # UGE-specific structs
 class drmaa2_j(drmaa2_struct):
@@ -246,28 +259,33 @@ class drmaa2_j(drmaa2_struct):
                 ("session_name", drmaa2_string),
                 ("job_name", drmaa2_string)]
 
+
 class drmaa2_jarray(drmaa2_struct):
     _fields_ = [("id", drmaa2_string),
                 ("job_list", drmaa2_j_list),
                 ("session_name", drmaa2_string)]
 
+
 class drmaa2_jsession(drmaa2_struct):
     _fields_ = [("contact", drmaa2_string),
                 ("name", drmaa2_string)]
 
+
 class drmaa2_msession(drmaa2_struct):
     _fields_ = [("name", drmaa2_string)]
+
 
 class drmaa2_r(drmaa2_struct):
     _fields_ = [("id", drmaa2_string),
                 ("session_name", drmaa2_string)]
 
+
 class drmaa2_rsession(drmaa2_struct):
     _fields_ = [("contact", drmaa2_string),
                 ("name", drmaa2_string)]
+
 
 #######################################################################
 # Test.
 if __name__ == '__main__':
     pass
-

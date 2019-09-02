@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,19 +15,20 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from ctypes import POINTER
 from ctypes import cast
 
 from .byte_string import ByteString
 from .drmaa2_constants import Cpu
-from .drmaa2_constants import Os 
+from .drmaa2_constants import Os
 from .drmaa2_ctypes import drmaa2_queueinfo
 from .drmaa2_object import Drmaa2Object
 from .drmaa2_exceptions import InvalidArgument
 
 from .drmaa2_version_descriptor import Drmaa2VersionDescriptor
+
 
 class QueueInfo(Drmaa2Object):
     """ High-level DRMAA2 queue info class. """
@@ -56,7 +57,7 @@ class QueueInfo(Drmaa2Object):
 
     def __del__(self):
         pass
-   
+
     @classmethod
     def get_implementation_specific_keys(cls):
         """
@@ -68,7 +69,8 @@ class QueueInfo(Drmaa2Object):
         []
         """
         if cls.implementation_specific_keys is None:
-            cls.implementation_specific_keys = cls.to_py_string_list(cls.get_drmaa2_library().drmaa2_queueinfo_impl_spec())
+            cls.implementation_specific_keys = cls.to_py_string_list(
+                cls.get_drmaa2_library().drmaa2_queueinfo_impl_spec())
         return cls.implementation_specific_keys
 
     @classmethod
@@ -88,5 +90,3 @@ class QueueInfo(Drmaa2Object):
                     ExceptionMapper.check_last_error_code()
                     py_queue_info_list.append(None)
         return py_queue_info_list
-
- 

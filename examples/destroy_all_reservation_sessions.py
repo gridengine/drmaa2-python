@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 from drmaa2 import ReservationSession
 
@@ -27,5 +27,3 @@ if __name__ == '__main__':
         ReservationSession.destroy_by_name(name)
     session_names = ReservationSession.list_session_names()
     print('Remaining session names: %s' % session_names)
-    
-

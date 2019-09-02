@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,13 +15,13 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import platform
 from .drmaa2_constants import PY_STRING_TYPE
 
-class ByteString:
 
+class ByteString:
     python_version = platform.python_version_tuple()[0]
 
     def __init__(self, s=''):
@@ -49,4 +49,3 @@ class ByteString:
                 return self.s.decode()
             except AttributeError:
                 return self.s
-

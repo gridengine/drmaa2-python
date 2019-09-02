@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 class Singleton(object):
     """ Base class for singleton objects. """
@@ -42,6 +42,7 @@ class Singleton(object):
         if self.__instance is not None:
             return
 
+
 #######################################################################
 # Test.
 if __name__ == '__main__':
@@ -51,5 +52,3 @@ if __name__ == '__main__':
     print('B=%s' % b)
     c = Singleton.get_instance()
     print('C=%s' % c)
-
-

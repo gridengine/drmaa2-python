@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016-2019 Univa Corporation
 # 
@@ -15,21 +15,19 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 
 import os
 from drmaa2 import MonitoringSession
+
 
 def test_queue_info():
     q_name_list = os.popen('qconf -sql').read().split()
     print('\nGot queue list: %s' % q_name_list)
     ms = MonitoringSession('ms-01')
     qi_list = ms.get_all_queues(q_name_list)
-    assert(len(qi_list) > 0)
+    assert (len(qi_list) > 0)
     for qi in qi_list:
         q_name = qi.name
         print('\nChecking queue: %s' % (qi.to_dict()))
-        assert(q_name in q_name_list)
-    
-
-
+        assert (q_name in q_name_list)
