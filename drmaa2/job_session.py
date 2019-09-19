@@ -36,6 +36,7 @@ from .job_array import JobArray
 from .log_manager import LogManager
 from .exception_mapper import ExceptionMapper
 from .drmaa2_exceptions import Drmaa2Exception
+from .drmaa2_exceptions import InvalidArgument
 
 
 class JobSession(Drmaa2Object):
@@ -83,6 +84,7 @@ class JobSession(Drmaa2Object):
         if not name:
             name = uuid4().hex
             check_for_existing_session = False
+
         contact = contact or session_dict.get('contact') or drmaa2_string()
         create_new_session = True
         if check_for_existing_session:
@@ -129,6 +131,8 @@ class JobSession(Drmaa2Object):
             struct = self.get_drmaa2_library().drmaa2_create_jsession_as(auth._struct, ByteString(name).encode(),
                                                                          ByteString(contact).encode())
         else:
+            if '@' in name:
+                raise InvalidArgument('session name with @ is not allowed')
             struct = self.get_drmaa2_library().drmaa2_create_jsession(ByteString(name).encode(),
                                                                       ByteString(contact).encode())
         if not struct:
@@ -188,11 +192,13 @@ class JobSession(Drmaa2Object):
         if auth:
             auth = Sudo.create_from_dict(auth)
             self.logger.debug('Using sudo object: {}'.format(auth))
-            self.exception_mapper.check_status_code(
-                self.get_drmaa2_library().drmaa2_destroy_jsession_as(auth._struct, self._name_bs.encode()))
+            if self._name_bs.decode() != ''.decode():
+                self.exception_mapper.check_status_code(
+                    self.get_drmaa2_library().drmaa2_destroy_jsession_as(auth._struct, self._name_bs.encode()))
         else:
-            self.exception_mapper.check_status_code(
-                self.get_drmaa2_library().drmaa2_destroy_jsession(self._name_bs.encode()))
+            if self._name_bs.decode() != ''.decode():
+                self.exception_mapper.check_status_code(
+                    self.get_drmaa2_library().drmaa2_destroy_jsession(self._name_bs.encode()))
 
     @classmethod
     def destroy_by_name(cls, name, auth=None):

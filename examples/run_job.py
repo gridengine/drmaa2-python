@@ -19,13 +19,16 @@
 
 from drmaa2 import JobSession
 from drmaa2 import JobTemplate
+from drmaa2 import Sudo
 
 if __name__ == '__main__':
+    # auth = Sudo(username='andre')
     js = JobSession('js-01')
     print('Created job session: %s' % js.name)
     d = {'remote_command': '/bin/sleep', 'args': ['100']}
     print('Running job using dictionary: %s' % d)
     j = js.run_job(d)
+    # j = js.run_job(d, auth)
     print('Submitted job: %s' % j)
 
     jt = JobTemplate({'remote_command': '/bin/sleep', 'args': ['100']})
