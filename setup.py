@@ -42,14 +42,14 @@ if sys.version_info <= (2, 7):
     print(error, file=sys.stderr)
     sys.exit(1)
 
-with open("README.md") as f:
+with open("README.rst") as f:
     long_description = f.read()
 
 setup(name='uge-drmaa2',
       version=__version__,
       description='UGE DRMAA2 Python API',
       long_description=long_description,
-      long_description_content_type='text/markdown',
+      # long_description_content_type='text/markdown',
       author='Univa',
       author_email='info@univa.com',
       test_suite='test',
