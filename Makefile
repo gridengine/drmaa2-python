@@ -23,8 +23,8 @@ all: build doc
 .PHONY:deps install clean dist egg wheel distclean test doc
 deps install test:
 
-drmaa2/__init__.py : ./util/params.mk
-	cat $@ | sed 's?__version__ =.*?__version__ = $(VERSION)?' > $@.2 && mv $@.2 $@
+#drmaa2/__init__.py : ./util/params.mk
+#	cat $@ | sed 's?__version__ =.*?__version__ = $(VERSION)?' > $@.2 && mv $@.2 $@
 
 distclean: tidy
 
