@@ -21,6 +21,7 @@ import random
 from .utils import generate_random_string
 from .utils import needs_uge
 from drmaa2 import JobSession
+from drmaa2 import JobInfo
 
 
 @needs_uge
@@ -166,6 +167,7 @@ def test_get_jobs():
     print('\nSubmitted job: %s' % j)
     ji = j.get_info()
     print('Retrieving jobs matching job info %s' % ji)
-    j_list = js.get_jobs(ji)
+    ji2 = JobInfo({'job_id': ji.job_id})
+    j_list = js.get_jobs(ji2)
     print('Got jobs: %s' % j_list)
     assert (len(j_list) >= 1)
