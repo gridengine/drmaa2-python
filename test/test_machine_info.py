@@ -22,7 +22,7 @@ from drmaa2 import MonitoringSession
 
 
 def test_machine_info():
-    h = socket.gethostname()
+    h = socket.gethostname().split('.',1)[0] # use short name
     ms = MonitoringSession('ms-01')
     mi_list = ms.get_all_machines([h])
     print(mi_list)
