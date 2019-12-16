@@ -30,11 +30,11 @@ from drmaa2.drmaa2_constants import POSIX_EPOCH
 def test_job_info_from_job():
     session_name = generate_random_string()
     js = JobSession(session_name)
-    job_name = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name}
+    jn = 'drmaa2python-%s' % generate_random_string()
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': jn}
     j = js.run_job(d)
     ji = j.get_info()
-    assert (ji.job_name == job_name)
+    assert (ji.job_name == jn)
     print('\nJob info from job: %s' % (ji))
 
 
