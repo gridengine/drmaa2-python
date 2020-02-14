@@ -17,12 +17,15 @@
 ########################################################################### 
 # ___INFO__MARK_END__
 
-import socket
+import os
 from drmaa2 import MonitoringSession
 
 
 def test_machine_info():
-    h = socket.gethostname().split('.',1)[0] # use short name
+    host_list = os.popen('qconf -sel').read().split()
+    print('\nGot hosts: %s' % host_list)
+    h = host_list[0]
+    print('\nUsing first host: %s' % h)
     ms = MonitoringSession('ms-01')
     mi_list = ms.get_all_machines([h])
     print(mi_list)
