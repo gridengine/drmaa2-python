@@ -192,11 +192,11 @@ class JobSession(Drmaa2Object):
         if auth:
             auth = Sudo.create_from_dict(auth)
             self.logger.debug('Using sudo object: {}'.format(auth))
-            if self._name_bs.decode() != ''.decode():
+            if self._name_bs.decode() != ByteString('').decode():
                 self.exception_mapper.check_status_code(
                     self.get_drmaa2_library().drmaa2_destroy_jsession_as(auth._struct, self._name_bs.encode()))
         else:
-            if self._name_bs.decode() != ''.decode():
+            if self._name_bs.decode() != ByteString('').decode():
                 self.exception_mapper.check_status_code(
                     self.get_drmaa2_library().drmaa2_destroy_jsession(self._name_bs.encode()))
 
