@@ -162,7 +162,11 @@ class LibraryManager(Singleton):
         drmaa2_lib = None
         try:
             SGE_ROOT = os.environ['SGE_ROOT']
-            SGE_ARCH = os.popen(SGE_ROOT + '/util/arch').read().rstrip()
+            p = os.popen(SGE_ROOT + '/util/arch')
+            try:
+                SGE_ARCH = p.read().rstrip()
+            finally:
+                p.close()
             lib_dir = SGE_ROOT + '/lib/' + SGE_ARCH
             cls.logger.debug('Looking for DRMAA2 library under %s' % lib_dir)
             lib_paths = glob.glob(lib_dir + '/libdrmaa2.so')
