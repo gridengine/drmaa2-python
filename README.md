@@ -9,7 +9,7 @@ Please read the LICENSE file for a complete listing of the License.
 
 UGE DRMAA2 requires recent versions of the following software:
 
-1. UGE (8.6.0 or above)
+1. UGE (8.6.8 or above, see below)
 2. Python (v2.7.5 or later in 2.7 series, or in any 3.x series)
 3. Setuptools (0.9.8 or later; for egg installation)
 4. Nose (1.3.7 or later; for testing)
@@ -77,4 +77,3 @@ Note that there are a number of API usage examples located under the `examples` 
 ```sh
   $ make test
 ```
-
