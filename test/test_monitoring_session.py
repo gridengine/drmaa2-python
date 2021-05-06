@@ -55,7 +55,8 @@ def test_get_all_machines():
 def test_get_all_jobs():
     js = JobSession('js-01')
     j_name = 'drmaa2python-%s' % int(random.uniform(0, 1000))
-    j = js.run_job({'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': j_name})
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': j_name, 'output_path': '/dev/null', 'join_files': True}
+    j = js.run_job(d)
     print('\nSubmitted job: %s' % j)
     ji = j.get_info()
     j.wait_started()

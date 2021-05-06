@@ -32,7 +32,7 @@ def test_job_info_from_job():
     session_name = generate_random_string()
     js = JobSession(session_name)
     jn = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': jn}
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': jn, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     ji = j.get_info()
     assert (ji.job_name == jn)

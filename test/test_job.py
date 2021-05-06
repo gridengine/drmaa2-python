@@ -27,7 +27,7 @@ def test_get_info():
     session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
     job_name = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name}
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     j.wait_started()
     ji = j.get_info()
@@ -39,7 +39,7 @@ def test_get_state():
     session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
     job_name = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name}
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     (j_state, j_sub_state) = j.get_state()
     assert (isinstance(j_state, JobState))
@@ -50,7 +50,7 @@ def test_terminate():
     session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
     job_name = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command': '/bin/sleep', 'args': ['100'], 'job_name': job_name}
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     ji = j.get_info()
     assert (ji.terminating_signal is None)
@@ -66,7 +66,7 @@ def test_suspend_and_resume():
     session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
     job_name = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name}
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     j.wait_started()
     ji = j.get_info()
@@ -85,7 +85,7 @@ def test_hold_and_release():
     session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
     job_name = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name}
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     ji = j.get_info()
     assert (not ji.job_state.endswith('HELD'))
@@ -103,7 +103,7 @@ def test_wait_started():
     session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
     job_name = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name}
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     j.wait_started()
     s, ss = j.get_state()
@@ -115,7 +115,7 @@ def test_wait_terminated():
     session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
     job_name = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name}
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     j.wait_terminated()
     s, ss = j.get_state()
@@ -127,7 +127,7 @@ def test_get_template():
     session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
     job_name = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name}
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     jt = j.get_template()
     assert (jt.job_name == job_name)

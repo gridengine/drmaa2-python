@@ -26,7 +26,8 @@ from drmaa2 import JobState
 def test_terminate():
     session_name = generate_random_string()
     js = JobSession(session_name)
-    ja = js.run_bulk_jobs({'remote_command': '/bin/sleep', 'args': ['100']}, 1, 10, 3, 2)
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'output_path': '/dev/null', 'join_files': True}
+    ja = js.run_bulk_jobs(d, 1, 10, 3, 2)
     ja.terminate()
     j_list = ja.job_list
     failed_jobs = []
@@ -41,7 +42,8 @@ def test_terminate():
 def test_suspend_and_resume():
     session_name = generate_random_string()
     js = JobSession(session_name)
-    ja = js.run_bulk_jobs({'remote_command': '/bin/sleep', 'args': ['5']}, 1, 10, 3, 2)
+    d = {'remote_command': '/bin/sleep', 'args': ['5'], 'output_path': '/dev/null', 'join_files': True}
+    ja = js.run_bulk_jobs(d, 1, 10, 3, 2)
     j_list = ja.job_list
     js.wait_any_started(j_list)
     ja.suspend()
@@ -62,7 +64,8 @@ def test_suspend_and_resume():
 def test_hold_and_release():
     session_name = generate_random_string()
     js = JobSession(session_name)
-    ja = js.run_bulk_jobs({'remote_command': '/bin/sleep', 'args': ['5']}, 1, 10, 3, 2)
+    d = {'remote_command': '/bin/sleep', 'args': ['5'], 'output_path': '/dev/null', 'join_files': True}
+    ja = js.run_bulk_jobs(d, 1, 10, 3, 2)
     ja.hold()
     held_jobs = []
     j_list = ja.job_list
@@ -83,7 +86,8 @@ def test_get_template():
     session_name = generate_random_string()
     js = JobSession(session_name)
     job_name = 'drmaa2python-%s' % generate_random_string()
-    ja = js.run_bulk_jobs({'remote_command': '/bin/sleep', 'args': ['5'], 'job_name': job_name}, 1, 10, 3, 2)
+    d = {'remote_command': '/bin/sleep', 'args': ['5'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
+    ja = js.run_bulk_jobs(d, 1, 10, 3, 2)
     jt = ja.get_template()
     assert (jt.job_name == job_name)
     print('\nGet template: %s' % (jt))
