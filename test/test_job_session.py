@@ -73,7 +73,8 @@ def test_destroy_session():
 def test_run_job():
     session_name = generate_random_string()
     js = JobSession(session_name)
-    j = js.run_job({'remote_command': '/bin/sleep', 'args': ['5']})
+    d = {'remote_command': '/bin/sleep', 'args': ['5'], 'output_path': '/dev/null', 'join_files': True}
+    j = js.run_job(d)
     j_id = j.id
     assert (len(j_id) > 0)
     print('\nSubmitted job id: %s' % j_id)
@@ -82,7 +83,8 @@ def test_run_job():
 def test_run_bulk_jobs():
     session_name = generate_random_string()
     js = JobSession(session_name)
-    ja = js.run_bulk_jobs({'remote_command': '/bin/sleep', 'args': ['5']}, 1, 10, 5, 2)
+    d = {'remote_command': '/bin/sleep', 'args': ['5'], 'output_path': '/dev/null', 'join_files': True}
+    ja = js.run_bulk_jobs(d, 1, 10, 5, 2)
     jl = ja.job_list
     ja_id = ja.id
     assert (len(ja_id) > 0)
@@ -93,7 +95,8 @@ def test_run_bulk_jobs():
 def test_wait_any_started():
     session_name = generate_random_string()
     js = JobSession(session_name)
-    ja = js.run_bulk_jobs({'remote_command': '/bin/sleep', 'args': ['5']}, 1, 10, 5, 2)
+    d = {'remote_command': '/bin/sleep', 'args': ['5'], 'output_path': '/dev/null', 'join_files': True}
+    ja = js.run_bulk_jobs(d, 1, 10, 5, 2)
     jl = ja.job_list
     jl_ids = list(map(lambda j: j.id, jl))
     print('\nWaiting on start of any job with id from %s' % jl_ids)
@@ -105,7 +108,8 @@ def test_wait_any_started():
 def test_wait_any_terminated():
     session_name = generate_random_string()
     js = JobSession(session_name)
-    ja = js.run_bulk_jobs({'remote_command': '/bin/sleep', 'args': ['5']}, 1, 10, 5, 2)
+    d = {'remote_command': '/bin/sleep', 'args': ['5'], 'output_path': '/dev/null', 'join_files': True}
+    ja = js.run_bulk_jobs(d, 1, 10, 5, 2)
     jl = ja.job_list
     jl_ids = list(map(lambda j: j.id, jl))
     print('\nWaiting on termination of any job with id from %s' % jl_ids)
@@ -117,7 +121,8 @@ def test_wait_any_terminated():
 def test_wait_all_started():
     session_name = generate_random_string()
     js = JobSession(session_name)
-    ja = js.run_bulk_jobs({'remote_command': '/bin/sleep', 'args': ['5']}, 1, 10, 5, 2)
+    d = {'remote_command': '/bin/sleep', 'args': ['5'], 'output_path': '/dev/null', 'join_files': True}
+    ja = js.run_bulk_jobs(d, 1, 10, 5, 2)
     jl = ja.job_list
     jl_ids = list(map(lambda j: j.id, jl))
     jl_ids.sort()
@@ -132,7 +137,8 @@ def test_wait_all_started():
 def test_wait_all_terminated():
     session_name = generate_random_string()
     js = JobSession(session_name)
-    ja = js.run_bulk_jobs({'remote_command': '/bin/sleep', 'args': ['5']}, 1, 10, 5, 2)
+    d = {'remote_command': '/bin/sleep', 'args': ['5'], 'output_path': '/dev/null', 'join_files': True}
+    ja = js.run_bulk_jobs(d, 1, 10, 5, 2)
     jl = ja.job_list
     jl_ids = list(map(lambda j: j.id, jl))
     jl_ids.sort()
@@ -147,7 +153,8 @@ def test_wait_all_terminated():
 def test_get_job_array():
     session_name = generate_random_string()
     js = JobSession(session_name)
-    ja = js.run_bulk_jobs({'remote_command': '/bin/sleep', 'args': ['5']}, 1, 10, 5, 2)
+    d = {'remote_command': '/bin/sleep', 'args': ['5'], 'output_path': '/dev/null', 'join_files': True}
+    ja = js.run_bulk_jobs(d, 1, 10, 5, 2)
     ja2 = js.get_job_array(ja.id)
     assert (ja.id == ja2.id)
     print('\nRetrieved job array: %s' % ja2)
@@ -164,7 +171,8 @@ def test_get_job_categories():
 def test_get_jobs():
     js = JobSession('js-01')
     j_name = 'drmaa2python-%s' % int(random.uniform(0, 1000))
-    j = js.run_job({'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': j_name})
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': j_name, 'output_path': '/dev/null', 'join_files': True}
+    j = js.run_job(d)
     print('\nSubmitted job: %s' % j)
     ji = j.get_info()
     print('Retrieving jobs matching job info %s' % ji)

@@ -26,19 +26,19 @@ from drmaa2 import JobState
 def test_get_info():
     session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
-    job_name = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name}
+    jn = 'drmaa2python-%s' % generate_random_string()
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': jn, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     ji = j.get_info()
-    assert (ji.job_name == job_name)
+    assert (ji.job_name == jn)
     print('\nGet info: %s' % (ji))
 
 
 def test_wait_terminated():
     session_name = 'drmaa2python-%s' % generate_random_string()
     js = JobSession(session_name)
-    job_name = 'drmaa2python-%s' % generate_random_string()
-    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name}
+    jn = 'drmaa2python-%s' % generate_random_string()
+    d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': jn, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     j.wait_terminated()
     s, ss = j.get_state()
