@@ -1,3 +1,4 @@
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2008-2021 Univa Corporation (acquired and owned by Altair Engineering Inc.)
@@ -16,6 +17,7 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
+#
 from __future__ import with_statement, print_function
 import sys
 
@@ -27,11 +29,9 @@ except ImportError:
 
 try:
     from setuptools import setup
-
     extra = dict(include_package_data=True)
 except ImportError:
     from distutils.core import setup
-
     extra = {}
 
 import os
@@ -51,10 +51,10 @@ setup(name='uge-drmaa2',
       description='UGE DRMAA2 Python API',
       long_description=long_description,
       # long_description_content_type='text/markdown',
-      author='Univa',
-      author_email='info@univa.com',
+      author='Univa Corporation (acquired and owned by Altair Engineering Inc.)',
+      author_email='support@altair.com',
       test_suite='test',
-      url='https://www.univa.com',
+      url='https://www.altair.com',
       packages=['drmaa2'],
       install_requires=[],
       package_data={
