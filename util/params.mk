@@ -39,6 +39,6 @@ export DRMAA2_REL_STR    = Development
 ifneq ($(strip $(GIT_REV)),)
 export DRMAA2_REL_STR       = Development version ($(GIT_REV))
 endif
-export VERSION              = 8.6.8
+export VERSION              = 8.7.0b3
 export DRMAA2_PACKAGE_NAME  = drmaa2
 
