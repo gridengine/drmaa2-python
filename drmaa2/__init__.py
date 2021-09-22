@@ -50,4 +50,4 @@ get_drmaa_version = Version.get_drmaa_version
 get_job_session_names = JobSession.list_session_names 
 get_reservation_session_names = ReservationSession.list_session_names 
  
-__version__ = '8.7.0'
+__version__ = '8.7.1a0'
