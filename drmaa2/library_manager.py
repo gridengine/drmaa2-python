@@ -373,6 +373,10 @@ class LibraryManager(Singleton):
         drmaa2_lib.drmaa2_jsession_run_bulk_jobs.restype = POINTER(drmaa2_jarray)
         drmaa2_lib.drmaa2_jsession_run_bulk_jobs.argtypes = [POINTER(drmaa2_jsession), POINTER(drmaa2_jtemplate),
                                                              c_longlong, c_longlong, c_longlong, c_longlong]
+        drmaa2_lib.drmaa2_jsession_run_bulk_jobs_as.restype = POINTER(drmaa2_jarray)
+        drmaa2_lib.drmaa2_jsession_run_bulk_jobs_as.argtypes = [POINTER(drmaa2_sudo), POINTER(drmaa2_jsession),
+                                                                POINTER(drmaa2_jtemplate), c_longlong, c_longlong,
+                                                                c_longlong, c_longlong]
         drmaa2_lib.drmaa2_jsession_wait_any_started.restype = POINTER(drmaa2_j)
         drmaa2_lib.drmaa2_jsession_wait_any_started.argtypes = [POINTER(drmaa2_jsession), drmaa2_j_list, drmaa2_time]
         drmaa2_lib.drmaa2_jsession_wait_any_terminated.restype = POINTER(drmaa2_j)
