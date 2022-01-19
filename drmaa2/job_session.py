@@ -342,7 +342,7 @@ class JobSession(Drmaa2Object):
         >>> print(j)
         {'id': '542.1', 'session_name': 'js-01'}
         """
-        self.logger.debug('Wating for any one of {} jobs to start'.format(len(job_list)))
+        self.logger.debug('Waiting for any one of {} jobs to start'.format(len(job_list)))
         drmaa2_lib = self.get_drmaa2_library()
         ctypes_job_list = Job.to_ctypes_job_list(job_list)
         ctypes_job = drmaa2_lib.drmaa2_jsession_wait_any_started(self._struct, ctypes_job_list, int(timeout))
@@ -373,7 +373,7 @@ class JobSession(Drmaa2Object):
         >>> print(j)
         {'id': '542.1', 'session_name': 'js-01'}
         """
-        self.logger.debug('Wating for any one of {} jobs to terminate'.format(len(job_list)))
+        self.logger.debug('Waiting for any one of {} jobs to terminate'.format(len(job_list)))
         drmaa2_lib = self.get_drmaa2_library()
         ctypes_job_list = Job.to_ctypes_job_list(job_list)
         ctypes_job = drmaa2_lib.drmaa2_jsession_wait_any_terminated(self._struct, ctypes_job_list, int(timeout))
@@ -404,7 +404,7 @@ class JobSession(Drmaa2Object):
         >>> print(jl)
         [Job({'id': '542.1', 'session_name': 'js-01'}), Job({'id': '542.4', 'session_name': 'js-01'}), Job({'id': '542.7', 'session_name': 'js-01'}), Job({'id': '542.10', 'session_name': 'js-01'})]
         """
-        self.logger.debug('Wating for all of {} jobs to start'.format(len(job_list)))
+        self.logger.debug('Waiting for all of {} jobs to start'.format(len(job_list)))
         drmaa2_lib = self.get_drmaa2_library()
         ctypes_job_list = Job.to_ctypes_job_list(job_list)
         ctypes_job_list2 = drmaa2_lib.drmaa2_jsession_wait_all_started(self._struct, ctypes_job_list, int(timeout))
@@ -435,7 +435,7 @@ class JobSession(Drmaa2Object):
         >>> print(jl)
         [Job({'id': '542.1', 'session_name': 'js-01'}), Job({'id': '542.4', 'session_name': 'js-01'}), Job({'id': '542.7', 'session_name': 'js-01'}), Job({'id': '542.10', 'session_name': 'js-01'})]
         """
-        self.logger.debug('Wating for all of {} jobs to terminate'.format(len(job_list)))
+        self.logger.debug('Waiting for all of {} jobs to terminate'.format(len(job_list)))
         drmaa2_lib = self.get_drmaa2_library()
         ctypes_job_list = Job.to_ctypes_job_list(job_list)
         ctypes_job_list2 = drmaa2_lib.drmaa2_jsession_wait_all_terminated(self._struct, ctypes_job_list, int(timeout))
