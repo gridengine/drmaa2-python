@@ -1,6 +1,6 @@
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2021 Univa Corporation (acquired and owned by Altair Engineering Inc.)
+# Copyright 2008-2022 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
