@@ -1,7 +1,7 @@
 #
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2008-2021 Univa Corporation (acquired and owned by Altair Engineering Inc.)
+# Copyright 2008-2022 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -51,7 +51,7 @@ setup(name='uge-drmaa2',
       description='UGE DRMAA2 Python API',
       long_description=long_description,
       # long_description_content_type='text/markdown',
-      author='Univa Corporation (acquired and owned by Altair Engineering Inc.)',
+      author='Altair Engineering Inc.',
       author_email='support@altair.com',
       test_suite='test',
       url='https://www.altair.com',
