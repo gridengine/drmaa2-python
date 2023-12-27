@@ -260,6 +260,12 @@ class Drmaa2Object(object):
         return ctypes_list
 
     @classmethod
+    def to_ctypes_string_list_or_none(cls, py_list):
+        if py_list is None:
+            return None
+        return self.to_ctypes_string_list(py_list)
+
+    @classmethod
     def get_implementation_specific_keys(cls):
         return cls.implementation_specific_keys
 
