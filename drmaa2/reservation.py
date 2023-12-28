@@ -122,10 +122,11 @@ class Reservation(Drmaa2Object):
     def to_py_reservation_list(cls, ctypes_list):
         py_reservation_list = list()
         if ctypes_list:
-            count = cls.drmaa2_lib.drmaa2_list_size(ctypes_list)
+            drmaa2_lib = cls.get_drmaa2_library()
+            count = drmaa2_lib.drmaa2_list_size(ctypes_list)
             cls.logger.debug('Converting ctypes reservation list of size {}'.format(count))
             for i in range(count):
-                void_ptr = cls.drmaa2_lib.drmaa2_list_get(ctypes_list, i)
+                void_ptr = drmaa2_lib.drmaa2_list_get(ctypes_list, i)
                 if void_ptr:
                     r = cast(void_ptr, POINTER(drmaa2_r))
                     r = Reservation(r)

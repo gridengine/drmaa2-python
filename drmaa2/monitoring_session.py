@@ -129,7 +129,7 @@ class MonitoringSession(Drmaa2Object):
         """
         self.logger.debug('Requesting list of machines using filter: {}'.format(filter))
         drmaa2_lib = self.get_drmaa2_library()
-        ctypes_filter = self.to_ctypes_string_list(filter)
+        ctypes_filter = self.to_ctypes_string_list_or_none(filter)
         ctypes_machine_info_list = drmaa2_lib.drmaa2_msession_get_all_machines(self._struct, ctypes_filter)
         if not ctypes_machine_info_list:
             self.exception_mapper.check_last_error_code()
@@ -156,7 +156,7 @@ class MonitoringSession(Drmaa2Object):
         """
         self.logger.debug('Requesting list of queues using filter: {}'.format(filter))
         drmaa2_lib = self.get_drmaa2_library()
-        ctypes_filter = self.to_ctypes_string_list(filter)
+        ctypes_filter = self.to_ctypes_string_list_or_none(filter)
         ctypes_queue_info_list = drmaa2_lib.drmaa2_msession_get_all_queues(self._struct, ctypes_filter)
         if not ctypes_queue_info_list:
             self.exception_mapper.check_last_error_code()
@@ -187,7 +187,11 @@ class MonitoringSession(Drmaa2Object):
         reservation_info = filter
         if type(filter) == PY_DICT_TYPE:
             reservation_info = ReservationInfo(filter)
-        ctypes_filter = reservation_info._struct
+
+        ctypes_filter = None
+        if reservation_info is not None:
+            ctypes_filter = reservation_info._struct
+
         ctypes_reservation_list = drmaa2_lib.drmaa2_msession_get_all_reservations(self._struct, ctypes_filter)
         if not ctypes_reservation_list:
             self.exception_mapper.check_last_error_code()
@@ -215,7 +219,11 @@ class MonitoringSession(Drmaa2Object):
         job_info = filter
         if type(filter) == PY_DICT_TYPE:
             job_info = JobInfo(filter)
-        ctypes_filter = job_info._struct
+
+        ctypes_filter = None
+        if job_info is not None:
+            ctypes_filter = job_info._struct
+
         ctypes_job_list = drmaa2_lib.drmaa2_msession_get_all_jobs(self._struct, ctypes_filter)
         if not ctypes_job_list:
             self.exception_mapper.check_last_error_code()

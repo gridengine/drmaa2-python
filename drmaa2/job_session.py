@@ -497,7 +497,11 @@ class JobSession(Drmaa2Object):
         job_info = filter
         if type(filter) == PY_DICT_TYPE:
             job_info = JobInfo(filter)
-        ctypes_filter = job_info._struct
+
+        ctypes_filter = None
+        if job_info is not None:
+            ctypes_filter = job_info._struct
+
         ctypes_job_list = drmaa2_lib.drmaa2_jsession_get_jobs(self._struct, ctypes_filter)
         if not ctypes_job_list:
             self.exception_mapper.check_last_error_code()
