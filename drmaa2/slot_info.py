@@ -65,7 +65,7 @@ class SlotInfo(Drmaa2Object):
 
     @classmethod
     def to_py_job_list(cls, ctypes_list):
-        py_job_list = list()
+        py_job_list = []
         if ctypes_list:
             count = cls.drmaa2_lib.drmaa2_list_size(ctypes_list)
             cls.logger.debug('Converting ctypes job list of size {}'.format(count))

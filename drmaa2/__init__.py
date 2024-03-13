@@ -16,12 +16,12 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-from .drmaa2_constants import (Bool, Capability, Cpu, Event, JobState, 
+from .drmaa2_constants import (Bool, Capability, Cpu, Event, JobState,
     ListType, Os, ResourceLimit, StatusCode, Time)
 from .drmaa2_exceptions import (Drmaa2Exception, DeniedByDrms,
-    DrmCommunicationError, TryLaterError, SessionManagementError, 
-    TimeoutError, InternalError, InvalidArgument, 
-    InvalidSession, InvalidState, ResourceNotAvailable, 
+    DrmCommunicationError, TryLaterError, SessionManagementError,
+    TimeoutError, InternalError, InvalidArgument,
+    InvalidSession, InvalidState, ResourceNotAvailable,
     UnsupportedAttribute, UnsupportedOperation,
     ImplementationSpecificError, AuthorizationError)
 from .library_manager import LibraryManager
@@ -44,10 +44,10 @@ from .notification import Notification
 
 get_drms_name = LibraryManager.get_drms_name
 get_drmaa_name = LibraryManager.get_drmaa_name
-drmaa_supports = LibraryManager.drmaa_supports 
+drmaa_supports = LibraryManager.drmaa_supports
 get_drms_version = Version.get_drms_version
 get_drmaa_version = Version.get_drmaa_version
-get_job_session_names = JobSession.list_session_names 
-get_reservation_session_names = ReservationSession.list_session_names 
- 
+get_job_session_names = JobSession.list_session_names
+get_reservation_session_names = ReservationSession.list_session_names
+
 __version__ = '8.9.0'

@@ -36,18 +36,18 @@ def test_get_drmaa_version():
 def test_to_dict():
     v = Version.get_drmaa_version()
     d = v.to_dict()
-    assert (v.major == d['major'])
-    assert (v.minor == d['minor'])
+    assert v.major == d['major']
+    assert v.minor == d['minor']
     print('\nVersion object conversion to dictionary: %s' % (d))
 
 
 def test_get_implementation_specific_keys():
     keys = Version.get_implementation_specific_keys()
-    assert (keys is not None)
+    assert keys is not None
     print('\nVersion object has %s impl specific keys %s.' % (len(keys), keys))
 
 
 def test_get_implementation_specific_attrs():
     attrs = Version.get_implementation_specific_attrs()
-    assert (attrs is not None)
+    assert attrs is not None
     print('\nVersion object has %s impl specific attrs %s.' % (len(attrs), attrs))

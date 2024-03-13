@@ -18,9 +18,9 @@
 #######################################################################################
 # ___INFO__MARK_END__
 
-from .utils import generate_random_string
-from drmaa2 import JobSession
 from drmaa2 import JobState
+from drmaa2 import JobSession
+from .utils import generate_random_string
 
 
 def test_get_info():
@@ -31,7 +31,7 @@ def test_get_info():
     j = js.run_job(d)
     j.wait_started()
     ji = j.get_info()
-    assert (ji.job_name == job_name)
+    assert ji.job_name == job_name
     print('\nGet info: %s' % (ji))
 
 
@@ -41,8 +41,8 @@ def test_get_state():
     job_name = 'drmaa2python-%s' % generate_random_string()
     d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
-    (j_state, j_sub_state) = j.get_state()
-    assert (isinstance(j_state, JobState))
+    (j_state, _) = j.get_state()
+    assert isinstance(j_state, JobState)
     print('\nGet state %s for job %s' % (j_state, j))
 
 
@@ -53,12 +53,12 @@ def test_terminate():
     d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     ji = j.get_info()
-    assert (ji.terminating_signal is None)
+    assert ji.terminating_signal is None
     j.wait_started()
     j.terminate()
     j.wait_terminated()
     ji = j.get_info()
-    assert (ji.terminating_signal is not None)
+    assert ji.terminating_signal is not None
     print('\nTerminate job: %s' % (ji))
 
 
@@ -70,14 +70,14 @@ def test_suspend_and_resume():
     j = js.run_job(d)
     j.wait_started()
     ji = j.get_info()
-    assert (ji.job_state != JobState.SUSPENDED.name)
+    assert ji.job_state != JobState.SUSPENDED.name
     j.suspend()
     ji = j.get_info()
-    assert (ji.job_state == JobState.SUSPENDED.name)
+    assert ji.job_state == JobState.SUSPENDED.name
     print('\nSuspend job: %s' % (ji))
     j.resume()
     ji = j.get_info()
-    assert (ji.job_state != JobState.SUSPENDED.name)
+    assert ji.job_state != JobState.SUSPENDED.name
     print('Resume job: %s' % (ji))
 
 
@@ -88,14 +88,14 @@ def test_hold_and_release():
     d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     ji = j.get_info()
-    assert (not ji.job_state.endswith('HELD'))
+    assert not ji.job_state.endswith('HELD')
     j.hold()
     ji = j.get_info()
-    assert (ji.job_state.endswith('HELD'))
+    assert ji.job_state.endswith('HELD')
     print('\nHold job: %s' % (ji))
     j.release()
     ji = j.get_info()
-    assert (not ji.job_state.endswith('HELD'))
+    assert not ji.job_state.endswith('HELD')
     print('Release job: %s' % (ji))
 
 
@@ -106,8 +106,8 @@ def test_wait_started():
     d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     j.wait_started()
-    s, ss = j.get_state()
-    assert (s == JobState.RUNNING)
+    s, _ = j.get_state()
+    assert s == JobState.RUNNING
     print('\nWait started for job: %s' % (j))
 
 
@@ -118,8 +118,8 @@ def test_wait_terminated():
     d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     j.wait_terminated()
-    s, ss = j.get_state()
-    assert (s == JobState.DONE)
+    s, _ = j.get_state()
+    assert s == JobState.DONE
     print('\nWait terminated for job: %s' % (j))
 
 
@@ -130,5 +130,5 @@ def test_get_template():
     d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     jt = j.get_template()
-    assert (jt.job_name == job_name)
+    assert jt.job_name == job_name
     print('\nGet template: %s' % (jt))

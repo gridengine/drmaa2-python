@@ -107,7 +107,7 @@ class MachineInfo(Drmaa2Object):
     @classmethod
     def to_py_machine_info_list(cls, ctypes_list):
         drmaa2_lib = cls.get_drmaa2_library()
-        py_machine_info_list = list()
+        py_machine_info_list = []
         if ctypes_list:
             count = drmaa2_lib.drmaa2_list_size(ctypes_list)
             cls.logger.debug('Converting ctypes machine info list of size {}'.format(count))

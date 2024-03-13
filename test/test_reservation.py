@@ -27,7 +27,7 @@ def test_get_info():
     r_name = 'res-%s' % int(random.uniform(0, 1000))
     r = rs.request_reservation({'reservation_name': r_name, 'duration': 100})
     ri = r.get_info()
-    assert (ri.reservation_name == r_name)
+    assert ri.reservation_name == r_name
     r.terminate()
     print('\nGet info: %s' % (ri))
 
@@ -46,5 +46,5 @@ def test_get_template():
     d = {'reservation_name': r_name, 'duration': 100}
     r = rs.request_reservation(d)
     rt = r.get_template()
-    assert (rt.reservation_name == r_name)
+    assert rt.reservation_name == r_name
     print('\nGet template: %s' % (rt))

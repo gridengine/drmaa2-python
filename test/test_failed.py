@@ -18,9 +18,9 @@
 #######################################################################################
 # ___INFO__MARK_END__
 
-from .utils import generate_random_string
-from drmaa2 import JobSession
 from drmaa2 import JobState
+from drmaa2 import JobSession
+from .utils import generate_random_string
 
 
 def test_get_info():
@@ -30,7 +30,7 @@ def test_get_info():
     d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': jn, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     ji = j.get_info()
-    assert (ji.job_name == jn)
+    assert ji.job_name == jn
     print('\nGet info: %s' % (ji))
 
 
@@ -41,8 +41,8 @@ def test_wait_terminated():
     d = {'remote_command': '/bin/sleep', 'args': ['10'], 'job_name': jn, 'output_path': '/dev/null', 'join_files': True}
     j = js.run_job(d)
     j.wait_terminated()
-    s, ss = j.get_state()
-    assert (s == JobState.DONE)
+    s, _ = j.get_state()
+    assert s == JobState.DONE
     print('\nWait terminated for job: %s' % (j))
     ji = j.get_info()
     print('\nGet info: %s' % (ji))

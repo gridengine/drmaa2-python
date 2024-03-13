@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 # ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2008-2022 Altair Engineering Inc.

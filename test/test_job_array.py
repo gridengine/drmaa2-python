@@ -35,7 +35,7 @@ def test_terminate():
         s, ss = j.get_state()
         if s == JobState.FAILED:
             failed_jobs.append(j)
-    assert (len(failed_jobs) > 0)
+    assert len(failed_jobs) > 0
     print('\nTerminate job array: %s' % (ja))
 
 
@@ -49,15 +49,15 @@ def test_suspend_and_resume():
     ja.suspend()
     suspended_jobs = []
     for j in j_list:
-        s, ss = j.get_state()
+        s, _ = j.get_state()
         if s == JobState.SUSPENDED:
             suspended_jobs.append(j)
-    assert (len(suspended_jobs) > 0)
+    assert len(suspended_jobs) > 0
     print('\nSuspend job array: %s' % (ja))
     ja.resume()
     for j in suspended_jobs:
-        s, ss = j.get_state()
-        assert (s != JobState.SUSPENDED)
+        s, _ = j.get_state()
+        assert s != JobState.SUSPENDED
     print('Resume job array: %s' % (ja))
 
 
@@ -70,15 +70,15 @@ def test_hold_and_release():
     held_jobs = []
     j_list = ja.job_list
     for j in j_list:
-        s, ss = j.get_state()
+        s, _ = j.get_state()
         if s.name.endswith('HELD'):
             held_jobs.append(j)
-    assert (len(held_jobs) > 0)
+    assert len(held_jobs) > 0
     print('\nHold job array: %s' % (ja))
     ja.release()
     for j in held_jobs:
-        s, ss = j.get_state()
-        assert (not s.name.endswith('HELD'))
+        s, _ = j.get_state()
+        assert not s.name.endswith('HELD')
     print('Release job array: %s' % (ja))
 
 
@@ -89,5 +89,5 @@ def test_get_template():
     d = {'remote_command': '/bin/sleep', 'args': ['5'], 'job_name': job_name, 'output_path': '/dev/null', 'join_files': True}
     ja = js.run_bulk_jobs(d, 1, 10, 3, 2)
     jt = ja.get_template()
-    assert (jt.job_name == job_name)
+    assert jt.job_name == job_name
     print('\nGet template: %s' % (jt))

@@ -19,11 +19,11 @@
 # ___INFO__MARK_END__
 
 import datetime
+from drmaa2 import ReservationInfo
+from drmaa2 import ReservationSession
+from drmaa2.drmaa2_constants import POSIX_EPOCH
 from .utils import generate_random_string
 from .utils import generate_random_int
-from drmaa2 import ReservationSession
-from drmaa2 import ReservationInfo
-from drmaa2.drmaa2_constants import POSIX_EPOCH
 
 
 def test_reservation_info_from_reservation():
@@ -31,13 +31,13 @@ def test_reservation_info_from_reservation():
     reservation_name = 'r.%s' % generate_random_string()
     r = rs.request_reservation({'reservation_name': reservation_name, 'duration': 100})
     ri = r.get_info()
-    assert (ri.reservation_name == reservation_name)
+    assert ri.reservation_name == reservation_name
     print('\nReservation info from reservation: %s' % (ri))
 
 
 def test_get_implementation_specific_keys():
     keys = ReservationInfo.get_implementation_specific_keys()
-    assert (len(keys) > 0)
+    assert len(keys) > 0
     print('\nReservation info implementation specific keys: %s' % (keys))
 
 
@@ -45,7 +45,7 @@ def test_reservation_id_attr():
     ri = ReservationInfo()
     reservation_id = generate_random_string()
     ri.reservation_id = reservation_id
-    assert (ri.reservation_id == reservation_id)
+    assert ri.reservation_id == reservation_id
     print('\nReservation info with reservation_id: %s' % (reservation_id))
 
 
@@ -53,7 +53,7 @@ def test_reservation_name_attr():
     ri = ReservationInfo()
     reservation_name = generate_random_string()
     ri.reservation_name = reservation_name
-    assert (ri.reservation_name == reservation_name)
+    assert ri.reservation_name == reservation_name
     print('\nReservation info with reservation_name: %s' % (reservation_name))
 
 
@@ -78,11 +78,11 @@ def test_reserved_end_time_attr():
 def test_users_acl_attr():
     users_acl = []
     n_users_acl = generate_random_int(lower_bound=1, upper_bound=5)
-    for i in range(0, n_users_acl):
+    for _ in range(0, n_users_acl):
         users_acl.append(generate_random_string())
     ri = ReservationInfo()
     ri.users_acl = users_acl
-    assert (ri.users_acl == users_acl)
+    assert ri.users_acl == users_acl
     print('\nreservation info object with %s users_acl: %s' % (len(users_acl), users_acl))
 
 
@@ -90,18 +90,18 @@ def test_reserved_slots_attr():
     ri = ReservationInfo()
     reserved_slots = generate_random_int(lower_bound=1, upper_bound=1024)
     ri.reserved_slots = reserved_slots
-    assert (ri.reserved_slots == reserved_slots)
+    assert ri.reserved_slots == reserved_slots
     print('\nReservation info with reserved_slots: %s' % (reserved_slots))
 
 
 def test_reserved_machines_attr():
     reserved_machines = []
     n_reserved_machines = generate_random_int(lower_bound=1, upper_bound=5)
-    for i in range(0, n_reserved_machines):
+    for _ in range(0, n_reserved_machines):
         reserved_machines.append(generate_random_string())
     ri = ReservationInfo()
     ri.reserved_machines = reserved_machines
-    assert (ri.reserved_machines == reserved_machines)
+    assert ri.reserved_machines == reserved_machines
     print('\nreservation info object with %s reserved_machines: %s' % (len(reserved_machines), reserved_machines))
 
 
@@ -113,5 +113,5 @@ def test_implementation_specific_attr():
         implementation_specific[k] = v
     ri = ReservationInfo()
     ri.implementation_specific = implementation_specific
-    assert (ri.implementation_specific == implementation_specific)
+    assert ri.implementation_specific == implementation_specific
     print('\nReservation info object with implementation_specific: %s' % (implementation_specific))

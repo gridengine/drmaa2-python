@@ -120,7 +120,7 @@ class Reservation(Drmaa2Object):
 
     @classmethod
     def to_py_reservation_list(cls, ctypes_list):
-        py_reservation_list = list()
+        py_reservation_list = []
         if ctypes_list:
             drmaa2_lib = cls.get_drmaa2_library()
             count = drmaa2_lib.drmaa2_list_size(ctypes_list)
@@ -142,5 +142,5 @@ class Reservation(Drmaa2Object):
         ctypes_reservation_list = cls.drmaa2_lib.drmaa2_list_create(int(ListType.RESERVATIONLIST),
                                                                     drmaa2_list_entryfree())
         for r in py_reservation_list:
-            ExceptionMapper.check_status_code(cls.drmaa2_lib.drmaa2_list_add(ctypes_reservation_list, j._struct))
+            ExceptionMapper.check_status_code(cls.drmaa2_lib.drmaa2_list_add(ctypes_reservation_list, r._struct))
         return ctypes_reservation_list

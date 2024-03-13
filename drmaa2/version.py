@@ -77,7 +77,7 @@ class Version(Drmaa2Object):
         >>> print(Version.get_implementation_specific_attrs())
         ['uge_version_json':'xyz']
         """
-        ctypes_version = cls.get_drmaa2_library().drmaa2_get_drmaa_version();
+        ctypes_version = cls.get_drmaa2_library().drmaa2_get_drmaa_version()
         if cls.implementation_specific_attrs is None:
             cls.implementation_specific_attrs = cls.to_py_dict(
                 cls.get_drmaa2_library().uge_vi_impl_spec_get(ctypes_version))
@@ -111,7 +111,7 @@ class Version(Drmaa2Object):
         >>> print(v.minor)
         6.0
         """
-        ctypes_version = cls.get_drmaa2_library().drmaa2_get_drms_version();
+        ctypes_version = cls.get_drmaa2_library().drmaa2_get_drms_version()
         py_version = Version(ctypes_version)
         cls.get_drmaa2_library().drmaa2_version_free(ctypes_version)
         return py_version
@@ -129,7 +129,7 @@ class Version(Drmaa2Object):
         >>> print(v.minor)
         0
         """
-        ctypes_version = cls.get_drmaa2_library().drmaa2_get_drmaa_version();
+        ctypes_version = cls.get_drmaa2_library().drmaa2_get_drmaa_version()
         py_version = Version(ctypes_version)
         cls.get_drmaa2_library().drmaa2_version_free(ctypes_version)
         return py_version

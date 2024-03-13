@@ -37,7 +37,7 @@ def test_get_all_queues():
     for qi in qi_list:
         q_name = qi.name
         print('Checking queue: %s' % (qi.to_dict()))
-        assert (q_name in q_name_list)
+        assert q_name in q_name_list
 
 
 def test_get_all_machines():
@@ -49,7 +49,7 @@ def test_get_all_machines():
     for mi in mi_list:
         h_name = mi.name
         print('Checking machine: %s' % (mi.to_dict()))
-        assert (h_name in h_name_list)
+        assert h_name in h_name_list
 
 
 def test_get_all_jobs():
@@ -66,7 +66,7 @@ def test_get_all_jobs():
     print('Retrieving jobs matching job info %s' % ji2)
     j_list = ms.get_all_jobs(ji2)
     print('Got all jobs: %s' % j_list)
-    assert (len(j_list) >= 1)
+    assert len(j_list) >= 1
 
 
 def test_get_all_reservatios():
@@ -76,7 +76,7 @@ def test_get_all_reservatios():
     r = rs.request_reservation(d)
     print('\nCreated reservation: %s' % r)
     ri = r.get_info()
-    # At the moment one cannot have both reservation and monitoring 
+    # At the moment one cannot have both reservation and monitoring
     # sessions opened at the same time
     rs.close()
 
@@ -84,4 +84,4 @@ def test_get_all_reservatios():
     print('Retrieving reservations matching reservation info %s' % ri)
     r_list = ms.get_all_reservations(ri)
     print('Got all reservations: %s' % r_list)
-    assert (len(r_list) == 1)
+    assert len(r_list) == 1

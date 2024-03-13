@@ -27,8 +27,8 @@ def test_queue_info():
     print('\nGot queue list: %s' % q_name_list)
     ms = MonitoringSession('ms-01')
     qi_list = ms.get_all_queues(q_name_list)
-    assert (len(qi_list) > 0)
+    assert len(qi_list) > 0
     for qi in qi_list:
         q_name = qi.name
         print('\nChecking queue: %s' % (qi.to_dict()))
-        assert (q_name in q_name_list)
+        assert q_name in q_name_list

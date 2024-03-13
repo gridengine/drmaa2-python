@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 # ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2008-2022 Altair Engineering Inc.
@@ -22,8 +22,6 @@ import datetime
 from drmaa2 import ReservationInfo
 
 if __name__ == '__main__':
-    import datetime
-
     print('Impl. spec. keys: %s' % ReservationInfo.get_implementation_specific_keys())
     ri = ReservationInfo({'reservation_name': 'rs-01'})
     print('Initial reservation info: %s' % ri)

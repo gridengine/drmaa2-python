@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 # ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2008-2022 Altair Engineering Inc.
@@ -82,18 +82,18 @@ class ReservationSession(Drmaa2Object):
         contact = contact or session_dict.get('contact') or drmaa2_string()
         create_new_session = True
         if check_for_existing_session:
-             existing_session_names = self.list_session_names()
-             session_names_to_check = [name]
-             if contact:
-                 session_names_to_check.append('%s@%s' % (contact,name))
-             else:
-                 session_names_to_check.append('%s@%s' % (getpass.getuser(),name))
-             for n in session_names_to_check:
-                 if n in existing_session_names:
-                     name = n
-                     self.logger.debug('Discovered existing job session with name {}'.format(n))
-                     create_new_session = False
-                     break
+            existing_session_names = self.list_session_names()
+            session_names_to_check = [name]
+            if contact:
+                session_names_to_check.append('%s@%s' % (contact,name))
+            else:
+                session_names_to_check.append('%s@%s' % (getpass.getuser(),name))
+            for n in session_names_to_check:
+                if n in existing_session_names:
+                    name = n
+                    self.logger.debug('Discovered existing job session with name {}'.format(n))
+                    create_new_session = False
+                    break
 
         self._name_bs = ByteString()
         self._auth = auth
@@ -293,4 +293,3 @@ class ReservationSession(Drmaa2Object):
         self.logger.debug('Retrieved {} reservations'.format(len(py_reservation_list)))
         drmaa2_lib.drmaa2_list_free(pointer(c_void_p(ctypes_reservation_list)))
         return py_reservation_list
-

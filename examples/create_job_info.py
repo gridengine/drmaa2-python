@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 # ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2008-2022 Altair Engineering Inc.
@@ -22,7 +22,6 @@ import datetime
 from drmaa2 import JobInfo
 
 if __name__ == '__main__':
-    import datetime
 
     print('Impl. spec. keys: %s' % JobInfo.get_implementation_specific_keys())
     ji = JobInfo({'queue_name': 'all.q'})

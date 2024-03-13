@@ -25,14 +25,14 @@ from drmaa2 import Capability
 def test_get_drms_name():
     lm = LibraryManager.get_instance()
     n = lm.get_drms_name()
-    assert (n != '')
+    assert n != ''
     print('\nGot DRMS name: %s' % (n))
 
 
 def test_get_drmaa_name():
     lm = LibraryManager.get_instance()
     n = lm.get_drmaa_name()
-    assert (n != '')
+    assert n != ''
     print('\nGot DRMAA name: %s' % (n))
 
 
@@ -45,5 +45,5 @@ def test_drmaa_supports():
         if s:
             supported.append(s)
         print('Support for %s: %s' % (c, s))
-    assert (len(supported) > 0)
+    assert len(supported) > 0
     print('DRMAA2 supports %s out of %s capabilities' % (len(supported), len(Capability)))

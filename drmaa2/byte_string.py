@@ -36,17 +36,15 @@ class ByteString:
     def encode(self):
         if self.s is None or self.python_version == '2':
             return self.s
-        else:
-            try:
-                return self.s.encode()
-            except AttributeError:
-                return self.s
+        try:
+            return self.s.encode()
+        except AttributeError:
+            return self.s
 
     def decode(self):
         if self.s is None or self.python_version == '2':
             return self.s
-        else:
-            try:
-                return self.s.decode()
-            except AttributeError:
-                return self.s
+        try:
+            return self.s.decode()
+        except AttributeError:
+            return self.s

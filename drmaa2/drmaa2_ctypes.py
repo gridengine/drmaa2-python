@@ -72,8 +72,7 @@ class drmaa2_string(c_char_p):
         if isinstance(other, str):
             if self.python_version == '2':
                 return self.value == other
-            else:
-                return self.value == other.encode()
+            return self.value == other.encode()
         else:
             return self.value == other.value
 

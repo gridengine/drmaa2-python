@@ -164,7 +164,7 @@ class Drmaa2Object(object):
         >>> print(v.to_dict())
         {'implementation_specific': {}, 'major': '8', 'minor': '6.0'}
         """
-        d = dict()
+        d = {}
         if not self._struct:
             for (k, v) in self._dict.items():
                 if v is not None:
@@ -207,7 +207,7 @@ class Drmaa2Object(object):
 
     @classmethod
     def to_py_dict(cls, ctypes_dict):
-        py_dict = dict()
+        py_dict = {}
         if ctypes_dict:
             drmaa2_lib = cls.get_drmaa2_library()
             ctypes_list = drmaa2_lib.drmaa2_dict_list(ctypes_dict)
@@ -227,7 +227,7 @@ class Drmaa2Object(object):
 
     @classmethod
     def to_py_string_list(cls, ctypes_list):
-        py_list = list()
+        py_list = []
         if ctypes_list:
             drmaa2_lib = cls.get_drmaa2_library()
             list_size = drmaa2_lib.drmaa2_list_size(ctypes_list)
@@ -263,7 +263,7 @@ class Drmaa2Object(object):
     def to_ctypes_string_list_or_none(cls, py_list):
         if py_list is None:
             return None
-        return self.to_ctypes_string_list(py_list)
+        return cls.to_ctypes_string_list(py_list)
 
     @classmethod
     def get_implementation_specific_keys(cls):

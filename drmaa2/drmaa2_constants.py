@@ -33,7 +33,7 @@ UNSET_PRIORITY = -99999
 UNSET_TIME = -3
 
 POSIX_EPOCH = datetime.utcfromtimestamp(0)
-PY_DICT_TYPE = type(dict())
+PY_DICT_TYPE = type({})
 PY_STRING_TYPE = type('string')
 PY_BYTES_TYPE = type(b'string')
 

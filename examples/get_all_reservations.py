@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 # ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2008-2022 Altair Engineering Inc.
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     print('Created reservation: %s' % r)
     # ri = r.get_info()
     ri = ReservationInfo({'reservation_name': r_name})
-    # At the moment one cannot have both reservation and monitoring 
+    # At the moment one cannot have both reservation and monitoring
     # sessions opened at the same time
     rs.close()
 
