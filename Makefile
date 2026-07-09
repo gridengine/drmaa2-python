@@ -1,3 +1,15 @@
+#___INFO__MARK_BEGIN__
+#############################################################################
+#
+# This material contains trade secrets or otherwise confidential information
+# owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# "Siemens"), or its licensors. Access to and use of this information is
+# strictly limited as set forth in the Customer's applicable agreements with
+# Siemens.
+# Unpublished work. © 2026 Siemens.
+#
+#############################################################################
+#___INFO__MARK_END__
 
 include ./util/include.mk
 

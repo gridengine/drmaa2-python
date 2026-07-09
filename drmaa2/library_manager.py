@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2008-2022 Altair Engineering Inc.
+# Published work. © 2026 Siemens.
+#
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -119,7 +120,7 @@ class LibraryManager(Singleton):
         :returns: DRMS name
 
         >>> print(LibraryManager.get_drms_name())
-        Univa Grid Engine
+        HPCWorks Grid Engine
         """
         lm = LibraryManager.get_instance()
         ctypes_string = lm.get_drmaa2_library().drmaa2_get_drms_name();
@@ -133,7 +134,7 @@ class LibraryManager(Singleton):
         :returns: DRMAA name
 
         >>> print(LibraryManager.get_drmaa_name())
-        Univa Grid Engine Drmaa V2
+        HPCWorks Grid Engine Drmaa V2
         """
         lm = LibraryManager.get_instance()
         ctypes_string = lm.get_drmaa2_library().drmaa2_get_drmaa_name();

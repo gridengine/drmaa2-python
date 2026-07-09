@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2008-2022 Altair Engineering Inc.
+# Published work. © 2026 Siemens.
+#
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -59,7 +60,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'UGE DRMAA2 Python API'
-copyright = u'2018, Univa'
+copyright = u'Published work. © 2026 Siemens.'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -202,7 +203,7 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index.rst', 'UGEDRMAA2PythonAPI.tex', u'UGE DRMAA2 Python API Documentation',
-   u'Univa', 'manual'),
+   u'Siemens Industry Software Inc.', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -232,7 +233,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index.rst', 'ugedrmaa2pythonapi', u'UGE DRMAA2 Python API Documentation',
-     [u'Univa'], 1)
+     [u'Siemens Industry Software Inc.'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -246,7 +247,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index.rst', 'UGEDRMAA2PythonAPI', u'UGE DRMAA2 Python API Documentation',
-   u'Univa', 'UGEDRMAA2PythonAPI', 'One line description of project.',
+   u'Siemens Industry Software Inc.', 'UGEDRMAA2PythonAPI', 'One line description of project.',
    'Miscellaneous'),
 ]
 

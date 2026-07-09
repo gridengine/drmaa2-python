@@ -1,4 +1,5 @@
-(c) Copyright 2008-2022 Altair Engineering Inc.
+    Published work. © 2026 Siemens.
+
     Licensed under the Apache License, Version 2.0 (the "License"); you may not
     use this file except in compliance with the License.
 
@@ -74,7 +75,7 @@ This step is not needed if UGE DRMAA2 egg or wheel package is installed.
      $ python
      >>> import drmaa2
      >>> print(drmaa2.get_drmaa_name())
-     Univa Grid Engine Drmaa V2
+     HPCWorks Grid Engine Drmaa V2
 
 Note that there are a number of API usage examples located under the
 ``examples`` directory.
